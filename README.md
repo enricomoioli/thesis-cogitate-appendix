@@ -15,7 +15,7 @@ The thesis starts from the COGITATE adversarial collaboration, which compared in
 
 The thesis is written in Italian. In this repository the README, the code comments and the docstrings are in English; file and folder names, messages printed by the scripts and the labels inside the figures are in Italian, as in the thesis. The two preregistrations are kept in their original Italian version, which is binding, with an English translation alongside (`*_EN.md`).
 
-Main Italian terms in file names: *cap4* = chapter 4; *extension* = chapter 5; *analisi* = analysis; *pendenza* = slope; *stato prestimolo* = pre-stimulus state; *alto/basso* = high/low; *figure_tesi* = thesis figures; *schema* = diagram; *risultati, results* = results; *soggetti, pazienti* = subjects, patients; *elettrodi selettivi* = selective electrodes; *volti/oggetti* = faces/objects.
+Main Italian terms in file names: *cap4* = chapter 4; *extension* = chapter 5; *analisi* = analysis; *pendenza* = slope; *stato prestimolo* = pre-stimulus state; *alto/basso* = high/low; *figure_tesi* = thesis figures; *schema* = diagram; *risultati* = results; *soggetti, pazienti* = subjects, patients; *elettrodi selettivi* = selective electrodes; *volti/oggetti* = faces/objects.
 
 ## Contents, chapter by chapter
 
