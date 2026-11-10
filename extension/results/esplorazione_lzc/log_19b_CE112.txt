@@ -1,0 +1,34 @@
+Epoche: 1440, sfreq 512.0 Hz, 160 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 108
+Elettrodi selettivi trovati: 15
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_1', 'face', 'face_09', 'Center', '1500ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'face', 'face_09', 'Center', '1500ms', 'Irrelevant']
+Prove abbinate agli eventi: 107 su 108
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 24%
+
+=== Riepilogo per elettrodo ===
+       canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+  CE112-T2aA4      volti        0.406    0.156           0.120         0.107                  0.122
+ CE112-T2bHa3      volti        0.375    0.156          -0.024        -0.002                  0.098
+ CE112-T2bHa4      volti        0.359    0.188          -0.026         0.045                  0.061
+ CE112-T2bHa5      volti        0.438    0.156          -0.098        -0.215                  0.000
+   CE112-T1a1      volti        0.344    0.125           0.046        -0.149                  0.122
+   CE112-T1a2      volti        0.375    0.156           0.128        -0.099                  0.110
+   CE112-T1e3      volti        0.250    0.125          -0.069         0.021                  0.232
+   CE112-T1e4      volti        0.250    0.156          -0.116         0.012                  0.122
+   CE112-T1e5      volti        0.281    0.094           0.017        -0.030                  0.183
+   CE112-T1e6      volti        0.344    0.156           0.043        -0.081                  0.073
+ CE112-F2aCa9      volti        0.594    0.219          -0.171        -0.360                  0.073
+CE112-F2aCa10      volti        0.375    0.156          -0.187        -0.046                  0.134
+  CE112-T3Hb3    oggetti        0.438    0.102          -0.020        -0.225                  0.000
+  CE112-T3Hb4    oggetti        0.438    0.156          -0.154        -0.185                  0.146
+  CE112-T3Hb5    oggetti        0.375    0.125          -0.236        -0.211                  0.134
+
+Mediana fra elettrodi: rho(LZC, ordine) = -0.03; rho(LZC, alfa) = -0.08; prove pari alla mediana (dopo esclusione) = 12% (min 0%, max 23%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CE112
+

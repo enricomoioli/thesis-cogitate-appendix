@@ -1,0 +1,27 @@
+# Testo della tesi: non pubblicato in questo repository
+thesis/
+
+# Risultati pesanti e intermedi: si rigenerano con gli script
+extension/results/**/*.npz
+extension/results/**/*.npy
+extension/results/**/*.pkl
+extension/results/**/*.fif
+# eccezione: i due file della statistica, letti dagli script delle figure del cap. 5
+!extension/results/stato_prestimolo/statistica_alto_basso.npz
+!extension/results/pendenza/statistica_pendenza.npz
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# File di sistema
+Thumbs.db
+desktop.ini
+.DS_Store

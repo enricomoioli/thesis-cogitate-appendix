@@ -1,0 +1,61 @@
+
+======================================================================
+Preprocessing concluso il 2026-09-06 18:11
+Durata totale: 719 minuti (12.0 ore)
+Riusciti (4): CF103, CF104, CF109, CF110
+Falliti (33):
+    CE103  ->  returncode 1
+    CE106  ->  returncode 1
+    CE107  ->  returncode 1
+    CE108  ->  returncode 1
+    CE109  ->  returncode 1
+    CE110  ->  returncode 1
+    CE112  ->  returncode 1
+    CE113  ->  returncode 1
+    CE115  ->  returncode 1
+    CE118  ->  returncode 1
+    CE119  ->  returncode 1
+    CE120  ->  returncode 1
+    CE121  ->  returncode 1
+    CF105  ->  returncode 1
+    CF106  ->  returncode 1
+    CF107  ->  returncode 1
+    CF112  ->  returncode 1
+    CF113  ->  returncode 1
+    CF116  ->  returncode 1
+    CF117  ->  returncode 1
+    CF119  ->  returncode 1
+    CF120  ->  returncode 1
+    CF121  ->  returncode 1
+    CF122  ->  returncode 1
+    CF124  ->  returncode 1
+    CF125  ->  returncode 1
+    CF126  ->  returncode 1
+    CG101  ->  returncode 1
+    CG102  ->  returncode 1
+    CG103  ->  returncode 1
+    CG104  ->  returncode 1
+    CG105  ->  returncode 1
+    CG106  ->  returncode 1
+
+======================================================================
+Preprocessing concluso il 2026-09-07 06:52
+Durata totale: 681 minuti (11.3 ore)
+Riusciti (24): CE103, CE106, CE108, CE109, CE115, CE118, CE121, CF106, CF112, CF113, CF116, CF117, CF119, CF120, CF121, CF122, CF124, CF125, CF126, CG102, CG103, CG104, CG105, CG106
+Falliti (8):
+    CE107  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 17.7 GiB for an array with shape (8, 165, 1801216) and data type float64
+    CE110  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 3.18 GiB for an array with shape (177, 2408448) and data type float64
+    CE112  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 18.4 GiB for an array with shape (8, 157, 1970176) and data type float64
+    CE113  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 6.42 GiB for an array with shape (52, 16561664) and data type float64
+    CE119  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 8.28 GiB for an array with shape (100, 11108352) and data type float64
+    CE120  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 17.4 GiB for an array with shape (8, 162, 1801216) and data type float64
+    CF105  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 16.8 GiB for an array with shape (8, 175, 1615360) and data type float64
+    CF107  ->  returncode 1 | numpy.core._exceptions._ArrayMemoryError: Unable to allocate 18.9 GiB for an array with shape (8, 174, 1822720) and data type float64
+
+======================================================================
+Preprocessing concluso il 2026-09-07 14:07
+Durata totale: 326 minuti (5.4 ore)
+Riusciti (5): CE107, CE110, CE112, CE120, CF107
+Falliti (2):
+    CE113  ->  returncode 1 | _pickle.PicklingError: Could not pickle the task to send it to the workers.
+    CE119  ->  returncode 1 | _pickle.PicklingError: Could not pickle the task to send it to the workers.

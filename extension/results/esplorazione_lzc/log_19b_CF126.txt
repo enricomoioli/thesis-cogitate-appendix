@@ -1,0 +1,21 @@
+Epoche: 1440, sfreq 512.0 Hz, 117 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 106
+Elettrodi selettivi trovati: 2
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_3', 'object', 'object_13', 'Center', '1000ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'object', 'object_18', 'Center', '1000ms', 'Relevant non-target']
+Prove abbinate agli eventi: 106 su 106
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 25%
+
+=== Riepilogo per elettrodo ===
+     canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+CF126-IFSC6    oggetti        0.406    0.094           0.028        -0.186                  0.112
+CF126-IFSC7    oggetti        0.422    0.156           0.098        -0.054                  0.150
+
+Mediana fra elettrodi: rho(LZC, ordine) = 0.06; rho(LZC, alfa) = -0.12; prove pari alla mediana (dopo esclusione) = 13% (min 11%, max 15%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CF126
+

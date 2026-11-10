@@ -1,0 +1,31 @@
+Epoche: 1440, sfreq 512.0 Hz, 101 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 106
+Elettrodi selettivi trovati: 12
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_1', 'object', 'object_01', 'Center', '1000ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'object', 'object_01', 'Center', '1000ms', 'Irrelevant']
+Prove abbinate agli eventi: 105 su 106
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 24%
+
+=== Riepilogo per elettrodo ===
+     canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+ CF122-RMT2      volti        0.297    0.117           0.076        -0.214                  0.136
+ CF122-RMT3      volti        0.219    0.094           0.065         0.054                  0.222
+CF122-RPIT5      volti        0.219    0.094           0.203         0.153                  0.185
+CF122-RPMT3      volti        0.344    0.156           0.024        -0.027                  0.123
+CF122-RPMT4      volti        0.312    0.156          -0.034        -0.221                  0.160
+CF122-RAMT1    oggetti        0.312    0.125          -0.024        -0.132                  0.111
+CF122-RAMT2    oggetti        0.312    0.125          -0.024        -0.132                  0.111
+ CF122-RMT5    oggetti        0.266    0.125           0.028        -0.122                  0.123
+CF122-RPIT2    oggetti        0.281    0.125          -0.062        -0.111                  0.185
+CF122-RPIT3    oggetti        0.219    0.125           0.076        -0.159                  0.136
+CF122-RTOJ7    oggetti        0.250    0.094          -0.031        -0.098                  0.123
+CF122-RTOJ8    oggetti        0.219    0.094          -0.072         0.086                  0.198
+
+Mediana fra elettrodi: rho(LZC, ordine) = 0.00; rho(LZC, alfa) = -0.12; prove pari alla mediana (dopo esclusione) = 14% (min 11%, max 22%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CF122
+

@@ -1,0 +1,26 @@
+Epoche: 1440, sfreq 512.0 Hz, 104 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 106
+Elettrodi selettivi trovati: 7
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_1', 'object', 'object_19', 'Right', '1000ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'letter', 'letter_10', 'Right', '1000ms', 'Relevant non-target']
+Prove abbinate agli eventi: 106 su 106
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 18%
+
+=== Riepilogo per elettrodo ===
+     canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+  CE109-RA1      volti        0.312    0.094           0.120        -0.058                  0.207
+ CE109-LAH6    oggetti        0.250    0.094          -0.096        -0.130                  0.172
+ CE109-LMH4    oggetti        0.344    0.156          -0.040        -0.234                  0.184
+ CE109-LMH5    oggetti        0.312    0.156           0.027        -0.298                  0.103
+CE109-LMI11    oggetti        0.375    0.094          -0.179        -0.117                  0.172
+CE109-LMI12    oggetti        0.375    0.094          -0.158        -0.056                  0.138
+ CE109-RAH4    oggetti        0.344    0.094          -0.012         0.011                  0.161
+
+Mediana fra elettrodi: rho(LZC, ordine) = -0.04; rho(LZC, alfa) = -0.12; prove pari alla mediana (dopo esclusione) = 17% (min 10%, max 21%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CE109
+

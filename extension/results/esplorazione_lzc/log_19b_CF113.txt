@@ -1,0 +1,33 @@
+Epoche: 1440, sfreq 512.0 Hz, 133 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 106
+Elettrodi selettivi trovati: 14
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_3', 'object', 'object_17', 'Center', '1500ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'object', 'object_03', 'Left', '1500ms', 'Relevant non-target']
+Prove abbinate agli eventi: 106 su 106
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 37%
+
+=== Riepilogo per elettrodo ===
+     canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+ CF113-RIT1      volti        0.375    0.117          -0.025        -0.291                  0.134
+ CF113-RIT2      volti        0.344    0.094          -0.170        -0.510                  0.164
+  CF113-RO3      volti        0.562    0.125          -0.103        -0.120                  0.090
+  CF113-RO4      volti        0.531    0.094          -0.058        -0.241                  0.164
+  CF113-RO7      volti        0.469    0.125          -0.206        -0.306                  0.149
+  CF113-RO8      volti        0.453    0.094          -0.223        -0.305                  0.075
+  CF113-G22    oggetti        0.469    0.094          -0.085        -0.236                  0.164
+  CF113-G23    oggetti        0.500    0.094           0.031        -0.444                  0.149
+  CF113-G24    oggetti        0.469    0.125           0.012        -0.347                  0.119
+  CF113-RO1    oggetti        0.531    0.125          -0.103        -0.417                  0.209
+  CF113-RO2    oggetti        0.562    0.086          -0.069        -0.353                  0.239
+  CF113-RO5    oggetti        0.438    0.125          -0.109        -0.297                  0.164
+CF113-DPMT1    oggetti        0.375    0.094          -0.092        -0.209                  0.224
+CF113-DPMT2    oggetti        0.406    0.094           0.051        -0.231                  0.164
+
+Mediana fra elettrodi: rho(LZC, ordine) = -0.09; rho(LZC, alfa) = -0.30; prove pari alla mediana (dopo esclusione) = 16% (min 7%, max 24%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CF113
+

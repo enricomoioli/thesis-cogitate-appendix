@@ -1,0 +1,23 @@
+Epoche: 1440, sfreq 512.0 Hz, 174 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 108
+Elettrodi selettivi trovati: 4
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_3', 'face', 'face_10', 'Center', '1500ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'letter', 'letter_12', 'Center', '1000ms', 'Irrelevant']
+Prove abbinate agli eventi: 108 su 108
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 27%
+
+=== Riepilogo per elettrodo ===
+     canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+CF117-RMTA3      volti        0.250    0.125           0.114        -0.040                  0.177
+CF117-RMTH6      volti        0.219    0.125           0.219         0.036                  0.139
+CF117-RITF3      volti        0.188    0.094           0.031         0.005                  0.152
+CF117-RITF4      volti        0.188    0.062           0.061        -0.099                  0.165
+
+Mediana fra elettrodi: rho(LZC, ordine) = 0.09; rho(LZC, alfa) = -0.02; prove pari alla mediana (dopo esclusione) = 16% (min 14%, max 18%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CF117
+

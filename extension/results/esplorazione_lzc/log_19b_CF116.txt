@@ -1,0 +1,26 @@
+Epoche: 1440, sfreq 512.0 Hz, 168 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 108
+Elettrodi selettivi trovati: 7
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_3', 'object', 'object_18', 'Left', '1500ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'letter', 'letter_17', 'Center', '1500ms', 'Irrelevant']
+Prove abbinate agli eventi: 108 su 108
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 21%
+
+=== Riepilogo per elettrodo ===
+    canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+ CF116-LA4      volti        0.406    0.156          -0.096        -0.219                  0.165
+ CF116-LA5      volti        0.406    0.156           0.075         0.051                  0.212
+CF116-LFF1      volti        0.250    0.094          -0.110        -0.140                  0.212
+CF116-LFF2      volti        0.281    0.094          -0.053        -0.080                  0.294
+CF116-LFF3      volti        0.281    0.062          -0.285        -0.139                  0.188
+CF116-LOF2      volti        0.469    0.156          -0.138        -0.382                  0.153
+CF116-LOF3      volti        0.438    0.094          -0.126        -0.240                  0.141
+
+Mediana fra elettrodi: rho(LZC, ordine) = -0.11; rho(LZC, alfa) = -0.14; prove pari alla mediana (dopo esclusione) = 19% (min 14%, max 29%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CF116
+

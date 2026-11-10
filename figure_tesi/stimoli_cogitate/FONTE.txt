@@ -1,0 +1,15 @@
+Stimoli originali dell'esperimento 1 di COGITATE, copiati senza modifiche (solo rinominati)
+dal repository del consorzio cogitate-experiment-code, ramo ECOG-Exp1, cartella stimuli/
+(https://github.com/Cogitate-consortium/cogitate-experiment-code, licenza MIT del repository).
+
+volto_fronte.png            <- faces/center/female/FACE223_00DEG_NOBACK_GRAYSCALEDcorrSize_SHINE.png
+volto_sinistra.png          <- faces/left/female/FACE223_330DEG_NOBACK_GRAYSCALEDcorrSize_SHINE.png
+volto_destra.png            <- faces/right/female/FACE223_30DEG_NOBACK_GRAYSCALEDcorrSize_SHINE.png
+oggetto_fronte.png          <- objects/center/CLOK1000_convertednoBack_GRAYSCALEDCropped350By350_SHINE.png
+lettera_fronte.png          <- chars/center/Real-A-00degSizeCorr.png
+falso_carattere_fronte.png  <- falses/center/False-A-00degSizeCorr.png
+
+Crediti richiesti dall'articolo (Cogitate Consortium 2025, Nature, legenda Fig. 1):
+"Object stimulus images ... are courtesy of Michael J. Tarr, Carnegie Mellon University,
+http://www.tarrlab.org/; face stimuli were created using FaceGen Modeler 3.1."
+Scaricati il 29 ottobre 2026.

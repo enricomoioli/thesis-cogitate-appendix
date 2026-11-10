@@ -1,0 +1,37 @@
+Epoche: 1440, sfreq 512.0 Hz, 144 canali
+  event type: ['stimulus offset', 'stimulus onset']
+  category: ['face', 'false', 'letter', 'object']
+  task_relevance: ['Irrelevant', 'Relevant non-target', 'Relevant target']
+  duration: ['1000ms', '1500ms', '500ms']
+Prove selezionate: 108
+Elettrodi selettivi trovati: 18
+Finestra (-0.5, 0.0): 256 campioni per prova
+Esempio metadati: ['block_1', 'miniblock_1', 'face', 'face_04', 'Center', '1000ms', 'Irrelevant'] | esempio eventi: ['block_1', 'miniblock_1', 'letter', 'letter_09', 'Right', '500ms', 'Relevant non-target']
+Prove abbinate agli eventi: 108 su 108
+Verifica abbinamento: scarto eventi-epoche, mediana 0.000 s, max deviazione 0.001 s (deve essere circa 0)
+Prove con spegnimento precedente < 1.0 s: 27%
+
+=== Riepilogo per elettrodo ===
+      canale preferenza  lzc_mediana  lzc_iqr  rho_lzc_ordine  rho_lzc_alfa  quota_pareggi_mediana
+  CF124-RSP1      volti        0.469    0.125          -0.166        -0.287                  0.139
+ CF124-RPBO8      volti        0.438    0.188           0.089        -0.174                  0.127
+ CF124-RPBO9      volti        0.375    0.125          -0.139        -0.452                  0.165
+ CF124-LHeT7      volti        0.344    0.133          -0.037        -0.082                  0.165
+ CF124-RHeT2    oggetti        0.469    0.156           0.074        -0.127                  0.139
+ CF124-RHeT3    oggetti        0.469    0.156           0.066        -0.285                  0.114
+ CF124-RHeT4    oggetti        0.438    0.195          -0.036        -0.057                  0.139
+ CF124-RHeT5    oggetti        0.406    0.164          -0.194        -0.081                  0.101
+ CF124-RPMO7    oggetti        0.500    0.156           0.062        -0.245                  0.139
+ CF124-RPBO4    oggetti        0.438    0.156           0.127        -0.176                  0.165
+ CF124-RPBO5    oggetti        0.312    0.125           0.062        -0.207                  0.101
+ CF124-RPBO6    oggetti        0.281    0.125          -0.098         0.035                  0.114
+ CF124-LPBO5    oggetti        0.406    0.164          -0.025        -0.190                  0.114
+ CF124-LPBO6    oggetti        0.438    0.219          -0.120        -0.266                  0.127
+ CF124-LPBO7    oggetti        0.625    0.156          -0.078        -0.308                  0.177
+ CF124-LPBO8    oggetti        0.594    0.156           0.056        -0.278                  0.190
+CF124-LPBO10    oggetti        0.641    0.125          -0.010        -0.138                  0.114
+CF124-LPBO11    oggetti        0.531    0.125          -0.013        -0.336                  0.114
+
+Mediana fra elettrodi: rho(LZC, ordine) = -0.02; rho(LZC, alfa) = -0.20; prove pari alla mediana (dopo esclusione) = 13% (min 10%, max 19%)
+Uscite in D:\TESI\manoscritto\extension\results\esplorazione_lzc\CF124
+
