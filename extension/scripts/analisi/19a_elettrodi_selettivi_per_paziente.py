@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-19a - Elettrodi selettivi per paziente (serie definitiva _v1v2d del cap. 4).
+19a - Selective electrodes per patient (final _v1v2d series of chapter 4).
 
-Solo lettura. Serve a scegliere il paziente su cui esplorare la LZC pre-stimolo.
-Legge i due file *_electrodes.tar.gz (ROI iit e gnw) salvati da synchrony_master.py:
-sono DataFrame pandas in pickle gzip, con colonne
+Read only. Used to choose the patient on which to explore pre-stimulus LZC.
+Reads the two *_electrodes.tar.gz files (ROI iit and gnw) saved by synchrony_master.py:
+they are pandas DataFrames in gzip pickle, with columns
 channels, ch_types, x, y, z, roi_pick, face, object
-(roi_pick = destinazioni; face/object = sorgenti selettive).
+(roi_pick = targets; face/object = selective sources).
 
-Uso (prompt con l'ambiente cogitate_ecog o l'installer MNE):
+Usage (prompt with the cogitate_ecog environment or the MNE installer):
     python 19a_elettrodi_selettivi_per_paziente.py
 """
 from pathlib import Path
@@ -28,7 +28,7 @@ for roi in ["iit", "gnw"]:
     righe.append(df)
 
 tutti = pd.concat(righe, ignore_index=True)
-# il paziente e' il prefisso del nome di canale (formato da verificare nell'output sopra)
+# the patient is the prefix of the channel name (format to be checked in the output above)
 tutti["paziente"] = tutti["channels"].astype(str).str.split("-").str[0]
 
 sorgenti = tutti[(tutti["face"] == True) | (tutti["object"] == True)]

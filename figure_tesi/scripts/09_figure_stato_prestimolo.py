@@ -2,30 +2,30 @@
 """
 09_figure_stato_prestimolo.py
 
-Figure del cap. 5 (stato pre-stimolo e connettivita' selettiva), con lo stesso
-stile e la stessa convenzione della figura 4.3 (07_figura_sincronia_sintesi.py).
+Figures of chapter 5 (pre-stimulus state and selective connectivity), with the
+same style and convention as figure 4.3 (07_figura_sincronia_sintesi.py).
 
-Figura 5.1: differenza fra prove con LZC pre-stimolo alta e bassa nell'effetto
-di categoria (volti meno oggetti) sul piano tempo-frequenza, media fra
-elettrodi selettivi; disposizione 2 x 2 come la figura 4.3 (righe: V1/V2 e
-prefrontale; colonne: selettivi per volti e per oggetti). Celle del cluster
-significativo (p < 0,05) contornate.
+Figure 5.1: difference between trials with high and low pre-stimulus LZC in the
+category effect (faces minus objects) on the time-frequency plane, averaged
+across selective electrodes; 2 x 2 layout as in figure 4.3 (rows: V1/V2 and
+prefrontal; columns: face-selective and object-selective). Cells of the
+significant cluster (p < 0.05) outlined.
 
-Figura 5.2: solo V1/V2, elettrodi selettivi per gli oggetti: effetto di
-categoria con LZC bassa, con LZC alta e loro differenza, con il cluster
-contornato in tutti e tre i pannelli.
+Figure 5.2: V1/V2 only, object-selective electrodes: category effect with
+low LZC, with high LZC and their difference, with the cluster outlined in all
+three panels.
 
-Scala fissa da -0,05 a +0,05 come nella figura 4.3 (valori oltre saturati);
-asse del tempo da -0,5 a 2,0 s.
+Fixed scale from -0.05 to +0.05 as in figure 4.3 (values beyond saturated);
+time axis from -0.5 to 2.0 s.
 
-Sola lettura dei risultati dello script 21
-(extension\\results\\stato_prestimolo\\statistica_alto_basso.npz e
+Reads only the results of script 21
+(extension\\results\\stato_prestimolo\\statistica_alto_basso.npz and
 statistica_alto_basso_riepilogo.csv).
 
-Output: figure_tesi\\output\\cap5\\stato_differenza.png/.pdf e
+Output: figure_tesi\\output\\cap5\\stato_differenza.png/.pdf and
         figure_tesi\\output\\cap5\\stato_v1v2_oggetti.png/.pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\09_figure_stato_prestimolo.py
 """
 
@@ -43,14 +43,14 @@ from stile_tesi import (GRIGIO_SCURO, MAPPA_DIVERGENTE, applica_stile, virgola_d
 RISULTATI = Path(r"D:\TESI\manoscritto\extension\results\stato_prestimolo")
 USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\cap5")
 
-FINESTRA_TEMPO = (-0.5, 2.0)   # come la figura 4.3
-LIMITE_SCALA = 0.05            # come la figura 4.3
-# fattore di ingrandimento del testo: nel PDF la figura viene ridotta alla
-# larghezza della pagina, quindi il testo va ingrandito di conseguenza
+FINESTRA_TEMPO = (-0.5, 2.0)   # as in figure 4.3
+LIMITE_SCALA = 0.05            # as in figure 4.3
+# text magnification factor: in the PDF the figure is shrunk to the
+# page width, so the text must be enlarged accordingly
 SCALA = 1.25
 DIMENSIONE_TITOLI = 10 * SCALA
 
-# (riga, colonna, chiave nel file, regione, categoria nel riepilogo, titolo)
+# (row, column, key in the file, region, category in the summary, title)
 PANNELLI = [(0, 0, "iit_cat1", "iit", "face", "V1/V2, selettivi per i volti"),
             (0, 1, "iit_cat2", "iit", "object", "V1/V2, selettivi per gli oggetti"),
             (1, 0, "gnw_cat1", "gnw", "face", "Prefrontale, selettivi per i volti"),
@@ -64,7 +64,7 @@ def mappa(asse, t, freqs, valori, significative):
         asse.contour(t, freqs, significative, levels=[0.5], colors=GRIGIO_SCURO, linewidths=0.9)
     asse.axvline(0, color=GRIGIO_SCURO, linestyle="--", linewidth=0.8)
     for lato in ("top", "right"):
-        asse.spines[lato].set_visible(True)  # le mappe restano incorniciate
+        asse.spines[lato].set_visible(True)  # the maps keep their frame
     virgola_decimale(asse)
     return m
 
@@ -87,7 +87,7 @@ def main():
     matplotlib.rcParams.update({"font.size": 10 * SCALA, "axes.labelsize": 10 * SCALA, "xtick.labelsize": 9 * SCALA,
                                 "ytick.labelsize": 9 * SCALA, "legend.fontsize": 9 * SCALA})
 
-    # Figura 5.1: differenza alto - basso, quattro insiemi
+    # Figure 5.1: high - low difference, four sets
     fig, assi = plt.subplots(2, 2, figsize=(10, 7), sharex=True, sharey=True)
     lettere = iter("ABCD")
     for riga, colonna, chiave, regione, categoria, titolo in PANNELLI:
@@ -106,7 +106,7 @@ def main():
     barra_colore(fig, m, "\u0394DFC (volti \u2212 oggetti), alta \u2212 bassa")
     salva(fig, USCITA / "stato_differenza")
 
-    # Figura 5.2: V1/V2, selettivi per gli oggetti: bassa, alta, differenza
+    # Figure 5.2: V1/V2, object-selective: low, high, difference
     fig, assi = plt.subplots(1, 3, figsize=(10.5, 3.8), sharex=True, sharey=True)
     cluster = (d["iit_cat2_p"] < 0.05)[:, finestra]
     for asse, lett, chiave, titolo in zip(

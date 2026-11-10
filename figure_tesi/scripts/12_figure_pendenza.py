@@ -2,28 +2,28 @@
 """
 12_figure_pendenza.py
 
-Figure del cap. 5, versione con la LZC continua (pendenza), con lo stesso stile
-e la stessa disposizione di 09_figure_stato_prestimolo.py.
+Figures of chapter 5, version with continuous LZC (slope), with the same style
+and layout as 09_figure_stato_prestimolo.py.
 
-Figura A: modulazione dell'effetto di categoria (pendenza della DFC sulla LZC
-standardizzata nelle prove con volti meno quella nelle prove con oggetti), media
-fra elettrodi selettivi; disposizione 2 x 2 come la figura 4.3. Celle del cluster
-significativo (p < 0,05) contornate.
+Figure A: modulation of the category effect (slope of DFC on standardized LZC in
+face trials minus that in object trials), averaged across selective electrodes;
+2 x 2 layout as in figure 4.3. Cells of the significant cluster (p < 0.05)
+outlined.
 
-Figura B: solo V1/V2, elettrodi selettivi per gli oggetti: pendenza nelle prove con
-volti, nelle prove con oggetti e loro differenza, con il cluster contornato.
+Figure B: V1/V2 only, object-selective electrodes: slope in face trials, in object
+trials and their difference, with the cluster outlined.
 
-Le pendenze hanno un'unita' diversa dalla DFC (variazione di DFC per una deviazione
-standard di LZC): la scala (LIMITE_SCALA) e' fissata qui, non ripresa dalla 4.3.
+Slopes have a different unit from DFC (change in DFC per standard deviation of
+LZC): the scale (LIMITE_SCALA) is set here, not taken from figure 4.3.
 
-Stampa anche quanti pezzi separati (componenti connesse sul piano tempo-frequenza)
-formano le celle significative di ogni insieme.
+It also prints how many separate pieces (connected components on the
+time-frequency plane) make up the significant cells of each set.
 
-Sola lettura dei risultati dello script 22 (extension\\results\\pendenza\\).
-Output: figure_tesi\\output\\cap5_pendenza\\pendenza_modulazione.png/.pdf e
+Reads only the results of script 22 (extension\\results\\pendenza\\).
+Output: figure_tesi\\output\\cap5_pendenza\\pendenza_modulazione.png/.pdf and
         figure_tesi\\output\\cap5_pendenza\\pendenza_v1v2_oggetti.png/.pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\12_figure_pendenza.py
 """
 
@@ -42,11 +42,11 @@ from stile_tesi import (GRIGIO_SCURO, MAPPA_DIVERGENTE, applica_stile, virgola_d
 RISULTATI = Path(r"D:\TESI\manoscritto\extension\results\pendenza")
 USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\cap5_pendenza")
 
-FINESTRA_TEMPO = (-0.5, 2.0)   # come la figura 4.3
-LIMITE_SCALA = 0.02            # pendenze: scala propria, da rivedere guardando la figura
+FINESTRA_TEMPO = (-0.5, 2.0)   # as in figure 4.3
+LIMITE_SCALA = 0.02            # slopes: own scale, to be reviewed by looking at the figure
 DIMENSIONE_TITOLI = 10
 
-# (riga, colonna, chiave nel file, regione, categoria nel riepilogo, titolo)
+# (row, column, key in the file, region, category in the summary, title)
 PANNELLI = [(0, 0, "iit_cat1", "iit", "face", "V1/V2, selettivi per i volti"),
             (0, 1, "iit_cat2", "iit", "object", "V1/V2, selettivi per gli oggetti"),
             (1, 0, "gnw_cat1", "gnw", "face", "Prefrontale, selettivi per i volti"),
@@ -60,7 +60,7 @@ def mappa(asse, t, freqs, valori, significative):
         asse.contour(t, freqs, significative, levels=[0.5], colors=GRIGIO_SCURO, linewidths=0.9)
     asse.axvline(0, color=GRIGIO_SCURO, linestyle="--", linewidth=0.8)
     for lato in ("top", "right"):
-        asse.spines[lato].set_visible(True)  # le mappe restano incorniciate
+        asse.spines[lato].set_visible(True)  # the maps keep their frame
     virgola_decimale(asse)
     return m
 
@@ -81,7 +81,7 @@ def main():
     t = tempi[finestra]
     applica_stile()
 
-    # quanti pezzi separati formano le celle significative (piano intero)
+    # how many separate pieces make up the significant cells (whole plane)
     for _, _, chiave, _, _, titolo in PANNELLI:
         significative = d[chiave + "_p"] < 0.05
         etichette, n_pezzi = ndimage.label(significative)
@@ -93,7 +93,7 @@ def main():
                       f"{tempi[colonne].min():.2f}-{tempi[colonne].max():.2f} s, "
                       f"p {d[chiave + '_p'][righe[0], colonne[0]]:.4f}")
 
-    # Figura A: modulazione, quattro insiemi
+    # Figure A: modulation, four sets
     fig, assi = plt.subplots(2, 2, figsize=(10, 7), sharex=True, sharey=True)
     lettere = iter("ABCD")
     for riga, colonna, chiave, regione, categoria, titolo in PANNELLI:
@@ -113,7 +113,7 @@ def main():
     USCITA.mkdir(parents=True, exist_ok=True)
     salva(fig, USCITA / "pendenza_modulazione")
 
-    # Figura B: V1/V2, selettivi per gli oggetti: pendenza volti, oggetti, differenza
+    # Figure B: V1/V2, object-selective: slope faces, objects, difference
     fig, assi = plt.subplots(1, 3, figsize=(14, 4.2), sharex=True, sharey=True)
     cluster = (d["iit_cat2_p"] < 0.05)[:, finestra]
     for asse, lett, chiave, titolo in zip(

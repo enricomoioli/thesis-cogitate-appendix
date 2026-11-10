@@ -1,28 +1,28 @@
-# Soggetti iEEG Cogitate — dataset pubblico
+# COGITATE iEEG subjects: public dataset
 
-Elenco completo dei 38 soggetti presenti nel rilascio pubblico BIDS
-(`E:\raw\ieeg_bids`), verificato il 6 settembre 2026 sui nomi delle cartelle
-scaricate e coerente con il conteggio di `participants.tsv`.
+Full list of the 38 subjects in the public BIDS release
+(`E:\raw\ieeg_bids`), checked on 6 September 2026 against the names of the
+downloaded folders and consistent with the count in `participants.tsv`.
 
-Tre siti di raccolta, riconoscibili dal prefisso: CE (13), CF (19), CG (6).
+Three recording sites, recognizable from the prefix: CE (13), CF (19), CG (6).
 
-Attenzione: la numerazione ha buchi (non esistono CE104, CE105, CE111, CF108,
-CF111, CF114, CF115, CF118, CF123). Sono soggetti scartati a monte dal
-consorzio: non usare i numeri per stimare l'avanzamento, usare la posizione
-nell'elenco.
+Note: the numbering has gaps (CE104, CE105, CE111, CF108, CF111, CF114,
+CF115, CF118 and CF123 do not exist). These subjects were discarded upstream
+by the consortium: do not use the numbers to estimate progress, use the
+position in the list.
 
-Nota sulla numerosita': l'articolo principale dichiara 34 pazienti iEEG
-reclutati, 32 analizzati dopo due esclusioni per dati incompleti, 29 confluiti
-nel "super partecipante" delle analisi multivariate. Il rilascio pubblico ne
-distribuisce 38, quindi include anche registrazioni non confluite nelle analisi
-pubblicate. Quali siano effettivamente utilizzabili va verificato soggetto per
-soggetto: il `participants.tsv` pubblico NON contiene le colonne di inclusione
-per analisi (`visual_responsiveness`, `category_selectivity`, `synchrony`) che
-gli script del consorzio si aspetterebbero.
+Note on sample size: the main article reports 34 iEEG patients recruited,
+32 analysed after two exclusions for incomplete data, and 29 included in the
+"super participant" of the multivariate analyses. The public release
+distributes 38, so it also includes recordings not used in the published
+analyses. Which ones are actually usable must be checked subject by subject:
+the public `participants.tsv` does NOT contain the per-analysis inclusion
+columns (`visual_responsiveness`, `category_selectivity`, `synchrony`) that
+the consortium scripts expect.
 
 ---
 
-## Elenco in ordine alfabetico (ordine di elaborazione degli script)
+## List in alphabetical order (processing order of the scripts)
 
 CE103
 CE106
@@ -65,15 +65,15 @@ CG106
 
 ---
 
-## Lista Python pronta per i tre script master
+## Python list ready for the three master scripts
 
-Da incollare in `visual_responsiveness_master.py`, `category_selectivity_master.py`
-e `synchrony_master.py`, al posto dell'attuale `["CF102"]` hardcoded nel blocco
-`if __name__ == "__main__":`.
+To paste into `visual_responsiveness_master.py`, `category_selectivity_master.py`
+and `synchrony_master.py`, in place of the hardcoded `["CF102"]` in the
+`if __name__ == "__main__":` block.
 
-ATTENZIONE: prima di usarla, rimuovere i soggetti risultati falliti nel
-preprocessing (vedi `log_preprocessing.txt`). Uno script master fallisce sul
-primo soggetto per cui non trova i dati preprocessati.
+WARNING: before using it, remove the subjects that failed in preprocessing
+(see `log_preprocessing.txt`). A master script fails on the first subject for
+which it does not find preprocessed data.
 
 ```python
 subjects_list = [
@@ -88,15 +88,15 @@ subjects_list = [
 
 ---
 
-## Dimensioni osservate durante il preprocessing
+## Sizes observed during preprocessing
 
-Utili per stimare i tempi: il costo dipende da numero di canali e durata
-della registrazione, non dal soggetto in se'.
+Useful for estimating run times: the cost depends on the number of channels
+and on the length of the recording, not on the subject as such.
 
-- CF102: 136 canali (110 ECoG, 24 sEEG, 2 ECG), 2471 s di registrazione,
-  93 canali validi dopo scarto, ~13 minuti di preprocessing
-- CE110: 188 canali, 4704 s
-- CE119: 161 canali
+- CF102: 136 channels (110 ECoG, 24 sEEG, 2 ECG), 2471 s of recording,
+  93 valid channels after rejection, ~13 minutes of preprocessing
+- CE110: 188 channels, 4704 s
+- CE119: 161 channels
 
-CF102 risulta finora tra i piu' piccoli: la stima di 13 minuti a soggetto
-e' quindi ottimistica, i soggetti piu' grandi richiedono sensibilmente di piu'.
+CF102 is among the smallest so far: the estimate of 13 minutes per subject
+is therefore optimistic, and larger subjects take considerably longer.

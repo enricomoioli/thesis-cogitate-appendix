@@ -2,31 +2,31 @@
 """
 06_mappa_3d_elettrodi.py
 
-Figura 4.2 della tesi: mappa 3D, sulla superficie piale di fsaverage, dei
-contatti usati nell'analisi di sincronia del cap. 4 (serie definitiva
+Figure 4.2 of the thesis: 3D map, on the pial surface of fsaverage, of the
+contacts used in the synchrony analysis of chapter 4 (final series
 category_faces_objects_synchrony_dfc_tfr_irrelevant_no_act_catsel_textaligned_v1v2d):
-- destinazioni nella regione visiva V1/V2 (approssimata con le etichette
-  Destrieux S_calcarine, G_cuneus, G_oc-temp_med-Lingual, Pole_occipital) e
-  nella regione prefrontale (12 etichette Destrieux), con i colori delle teorie;
-- elettrodi selettivi per i volti e per gli oggetti (sorgenti), in grigio.
+- targets in the visual region V1/V2 (approximated with the Destrieux labels
+  S_calcarine, G_cuneus, G_oc-temp_med-Lingual, Pole_occipital) and in the
+  prefrontal region (12 Destrieux labels), in the theory colours;
+- face-selective and object-selective electrodes (sources), in grey.
 
-Fonte dei contatti: i file "_electrodes.tar.gz" salvati da synchrony_master.py
-per le due ROI (colonne channels, x, y, z, roi_pick, face, object), cioe'
-esattamente i contatti entrati nell'analisi (72 destinazioni V1/V2 in 12
-pazienti, 585 prefrontali in 24, 183 elettrodi selettivi in 26).
-Coordinate gia' in spazio fsaverage, in metri.
+Source of the contacts: the "_electrodes.tar.gz" files saved by synchrony_master.py
+for the two ROIs (columns channels, x, y, z, roi_pick, face, object), i.e.
+exactly the contacts that entered the analysis (72 V1/V2 targets in 12
+patients, 585 prefrontal in 24, 183 selective electrodes in 26).
+Coordinates already in fsaverage space, in metres.
 
-Versione precedente (29 ottobre rinominata da 08_mappa_3d_elettrodi_mne.py):
-leggeva il manifest delle ROI del vecchio cap. 5.
+Previous version (renamed on 29 October from 08_mappa_3d_elettrodi_mne.py):
+it read the ROI manifest of the old chapter 5.
 
-Ambiente: quello creato dall'installer ufficiale MNE, che include lo stack
-3D (pyvista, VTK, Qt). fsaverage in D:\\MNE_data. Richiede il disco E:.
+Environment: the one created by the official MNE installer, which includes the
+3D stack (pyvista, VTK, Qt). fsaverage in D:\\MNE_data. Requires drive E:.
 
 Output (in figure_tesi\\output\\mappe_elettrodi\\):
-    vista_<nome>.png       -- una immagine per angolazione
-    mappa_3d_elettrodi.png / .pdf -- composizione delle viste con legenda
+    vista_<nome>.png       -- one image per view
+    mappa_3d_elettrodi.png / .pdf -- composition of the views with legend
 
-Uso (dal prompt MNE):
+Usage (from the MNE prompt):
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\06_mappa_3d_elettrodi.py
 """
 
@@ -41,7 +41,7 @@ import mne
 
 from stile_tesi import applica_stile, lettera, salva
 
-BIDS_ROOT = Path(r"E:\raw\ieeg_bids")  # verificare la lettera del disco esterno
+BIDS_ROOT = Path(r"E:\raw\ieeg_bids")  # check the drive letter of the external disk
 RISULTATI = (BIDS_ROOT / "derivatives" / "synchrony_analysis" / "sub-super" / "ses-1" / "ieeg" / "results"
              / "category_faces_objects_synchrony_dfc_tfr_irrelevant_no_act_catsel_textaligned_v1v2d"
              / "desbadcharej_notfil_lapref")
@@ -49,7 +49,7 @@ PREFISSO = "sub-super_ses-1_task-Dur_ana-synchrony_analysis_"
 SUBJECTS_DIR = Path(r"D:\MNE_data")
 OUTPUT_DIR = Path(r"D:\TESI\manoscritto\figure_tesi\output\mappe_elettrodi")
 
-# colori delle teorie per le destinazioni (stile_tesi.py), grigi per gli elettrodi selettivi
+# theory colours for the targets (stile_tesi.py), greys for the selective electrodes
 COLORI = {"iit": (0.12, 0.47, 0.71), "gnw": (0.84, 0.15, 0.16),
           "volti": (0.15, 0.15, 0.15), "oggetti": (0.5, 0.5, 0.5)}
 ETICHETTE = {"iit": "Destinazioni V1/V2 (IIT)", "gnw": "Destinazioni prefrontali (GNWT)",
@@ -57,17 +57,17 @@ ETICHETTE = {"iit": "Destinazioni V1/V2 (IIT)", "gnw": "Destinazioni prefrontali
 ORDINE = ("iit", "gnw", "volti", "oggetti")
 ALPHA_PIALE = 0.25
 DIMENSIONE_FINESTRA = (900, 900)
-# fattore di ingrandimento del testo della composizione: nel PDF la figura viene
-# ridotta all'80% della larghezza della pagina, quindi il testo va ingrandito
+# text magnification factor of the composition: in the PDF the figure is
+# shrunk to 80% of the page width, so the text must be enlarged
 SCALA = 1.3
-# Viste sezionate: si mostra solo cio' che sta da un lato di un piano.
-# - laterali: piano sagittale mediano (x = 0), ogni vista mostra solo il proprio
-#   emisfero, cosi' i contatti dell'emisfero opposto non compaiono in trasparenza;
-# - anteriore/posteriore: piano coronale, soglie scelte sulla diagnostica 02
-#   (le due ROI si sovrappongono tra -31 e -28.5 mm):
-#   posteriore, y < -25 mm: tutti i contatti IIT, esclusi tutti i GNW tranne 2;
-#   anteriore,  y > -20 mm: nessun contatto IIT, esclusi 7 GNW su 585.
-# valore = (asse, verso, soglia in mm): verso +1 mantiene > soglia, -1 mantiene < soglia
+# Sectioned views: only what lies on one side of a plane is shown.
+# - lateral: mid-sagittal plane (x = 0), each view shows only its own
+#   hemisphere, so contacts of the opposite hemisphere do not show through;
+# - anterior/posterior: coronal plane, thresholds chosen on diagnostic 02
+#   (the two ROIs overlap between -31 and -28.5 mm):
+#   posterior, y < -25 mm: all IIT contacts, all GNW excluded except 2;
+#   anterior,  y > -20 mm: no IIT contact, 7 GNW out of 585 excluded.
+# value = (axis, direction, threshold in mm): direction +1 keeps > threshold, -1 keeps < threshold
 SEZIONI = {
     "laterale_sinistra": ("x", -1, 0),
     "laterale_destra": ("x", 1, 0),
@@ -75,12 +75,12 @@ SEZIONI = {
     "anteriore": ("y", 1, -20),
 }
 
-# Telecamera impostata direttamente su pyvista (set_3d_view veniva ignorato:
-# nella prima esecuzione le quattro viste uscivano identiche, tutte frontali).
-# Coordinate fsaverage in metri: x = destra, y = anteriore, z = superiore.
+# Camera set directly through pyvista (set_3d_view was ignored:
+# in the first run the four views came out identical, all frontal).
+# fsaverage coordinates in metres: x = right, y = anterior, z = superior.
 FUOCO = (0.0, -0.02, 0.01)
 DISTANZA = 0.40
-# nome: (direzione da cui guarda la telecamera, vettore "alto" dell'immagine)
+# name: (direction the camera looks from, "up" vector of the image)
 VISTE = {
     "laterale_sinistra": ((-1, 0, 0), (0, 0, 1)),
     "laterale_destra": ((1, 0, 0), (0, 0, 1)),
@@ -95,8 +95,8 @@ TITOLI = {
     "posteriore": "Vista posteriore (sezione, y < {0} mm)".format(SEZIONI["posteriore"][2]),
     "ventrale": "Vista ventrale",
 }
-# lato dell'immagine (sinistra, destra) -> emisfero del cervello mostrato
-# (nelle viste anteriore e ventrale destra e sinistra dell'immagine si invertono)
+# side of the image (left, right) -> hemisphere of the brain shown
+# (in the anterior and ventral views left and right of the image are swapped)
 ORIENTAMENTO = {
     "anteriore": ("Dx", "Sx"),
     "posteriore": ("Sx", "Dx"),
@@ -105,7 +105,7 @@ ORIENTAMENTO = {
 
 
 def ritaglia_bianco(img, margine=10):
-    """Toglie il bordo bianco attorno al cervello nello screenshot."""
+    """Remove the white border around the brain in the screenshot."""
     non_bianco = np.where(img[..., :3].min(axis=2) < 250)
     if len(non_bianco[0]) == 0:
         return img
@@ -115,8 +115,8 @@ def ritaglia_bianco(img, margine=10):
 
 
 def uniforma_dimensioni(immagini):
-    """Porta tutte le immagini alla stessa dimensione (bordo bianco centrato),
-    cosi' i pannelli della figura composta restano allineati."""
+    """Bring all images to the same size (centred white border),
+    so that the panels of the composite figure stay aligned."""
     h = max(img.shape[0] for img in immagini.values())
     w = max(img.shape[1] for img in immagini.values())
     uniformate = {}
@@ -130,8 +130,8 @@ def uniforma_dimensioni(immagini):
 
 
 def imposta_sezione(plotter, sezione):
-    """Applica (sezione = (asse, verso, soglia_mm)) o rimuove (sezione None) un
-    piano di taglio a tutti gli oggetti della scena."""
+    """Apply (sezione = (axis, direction, threshold_mm)) or remove (sezione None) a
+    clipping plane on all the objects in the scene."""
     from vtkmodules.vtkCommonDataModel import vtkPlane
     piano = None
     if sezione is not None:
@@ -140,7 +140,7 @@ def imposta_sezione(plotter, sezione):
         origine = [0.0, 0.0, 0.0]
         normale = [0.0, 0.0, 0.0]
         origine[i] = soglia_mm / 1000.0
-        normale[i] = float(verso)  # la parte mantenuta e' quella verso cui punta la normale
+        normale[i] = float(verso)  # the part kept is the one the normal points to
         piano = vtkPlane()
         piano.SetOrigin(*origine)
         piano.SetNormal(*normale)
@@ -154,12 +154,12 @@ def imposta_sezione(plotter, sezione):
 
 
 def carica_coordinate():
-    """Ritorna (nomi, coordinate_m, gruppo_di_ogni_contatto) per i contatti dell'analisi
-    di sincronia: destinazioni delle due ROI ed elettrodi selettivi (senza duplicati)."""
+    """Return (names, coordinates_m, group_of_each_contact) for the contacts of the
+    synchrony analysis: targets of the two ROIs and selective electrodes (no duplicates)."""
     tabelle = {}
     for roi in ("iit", "gnw"):
         file_name = RISULTATI / (PREFISSO + roi + "_dfc_tfr_electrodes.tar.gz")
-        # salvato con DataFrame.to_pickle: e' un pickle compresso gzip, non un archivio tar
+        # saved with DataFrame.to_pickle: it is a gzip-compressed pickle, not a tar archive
         tabelle[roi] = pd.read_pickle(file_name, compression="gzip")
 
     nomi, coords, gruppi = [], [], []
@@ -224,7 +224,7 @@ def main():
     imposta_sezione(plotter, None)
     immagini = uniforma_dimensioni(immagini)
 
-    # 5 pannelli: due righe da due, ventrale centrata in basso
+    # 5 panels: two rows of two, ventral centred at the bottom
     applica_stile()
     matplotlib.rcParams.update({"axes.titlesize": 11 * SCALA})
     composta = plt.figure(figsize=(10, 15))
@@ -236,7 +236,7 @@ def main():
         lettera(asse, lett, TITOLI[nome])
         if nome in ORIENTAMENTO:
             sx, dx = ORIENTAMENTO[nome]
-            # etichette appena sotto il cervello, ai suoi bordi (coordinate in pixel dell'immagine)
+            # labels just below the brain, at its edges (pixel coordinates of the image)
             righe, colonne = np.where(img[..., :3].min(axis=2) < 250)
             basso, bordo_sx, bordo_dx = righe.max(), colonne.min(), colonne.max()
             asse.text(bordo_sx, basso + 15, sx, fontsize=11 * SCALA, color="0.3", va="top", ha="left")

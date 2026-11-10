@@ -2,25 +2,25 @@
 """
 05_percorso_analisi.py
 
-Diagramma del percorso di analisi della parte empirica: dai dati pubblici del
-consorzio al tentativo MEG (interrotto), alla riproduzione iEEG del cap. 4 e
-all'estensione del cap. 5, che parte dagli elettrodi selettivi del cap. 4,
-divide le prove secondo la LZC pre-stimolo e ricalcola la DFC sulle due meta'.
-Contenuti presi dal testo del cap. 4 e dalla preregistrazione del cap. 5.
+Diagram of the analysis path of the empirical part: from the public data of the
+consortium to the MEG attempt (interrupted), to the iEEG reproduction of chapter 4
+and to the extension of chapter 5, which starts from the selective electrodes of
+chapter 4, splits the trials by pre-stimulus LZC and recomputes the DFC on the two
+halves. Contents taken from the text of chapter 4 and the chapter 5 preregistration.
 
-I cerchi numerati segnano la fase in cui emerge ciascuno dei sei difetti
-oggettivi della tabella tab:difetti del cap. 4 (stessa numerazione: 1, 2 e 3
-nel preprocessing, 4 nella selettivita', 5 e 6 nella sincronia).
-Aggiornato il 3 novembre: tolti la fase di responsivita' visiva (filtro di
-attivazione disattivato nella configurazione finale) e la robustezza; testi piu' grandi.
-Aggiornato il 4 novembre: figura piu' stretta (10 pollici) perche' nel PDF il
-testo restasse leggibile; etichette di corsia sopra le corsie, testi a capo.
+The numbered circles mark the stage at which each of the six objective defects of
+table tab:difetti in chapter 4 emerges (same numbering: 1, 2 and 3 in
+preprocessing, 4 in selectivity, 5 and 6 in synchrony).
+Updated on 3 November: removed the visual responsiveness stage (activation filter
+disabled in the final configuration) and the robustness check; larger text.
+Updated on 4 November: narrower figure (10 inches) so that the text stays
+readable in the PDF; lane labels above the lanes, wrapped text.
 
-Solo grigi: rosso e blu sono riservati alle teorie (stile_tesi.py).
+Greys only: red and blue are reserved for the theories (stile_tesi.py).
 
 Output: figure_tesi\\output\\schemi\\percorso_analisi.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\05_percorso_analisi.py
 """
 
@@ -35,12 +35,12 @@ from stile_tesi import GRIGIO_SCURO, GRIGIO_MEDIO, applica_stile, salva
 
 USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\schemi\percorso_analisi")
 
-L, H = 3.15, 1.4        # larghezza e altezza dei riquadri
-PASSO = 3.5             # distanza orizzontale fra riquadri
-X0 = L / 2 + 0.05       # centro della prima colonna
+L, H = 3.15, 1.4        # width and height of the boxes
+PASSO = 3.5             # horizontal distance between boxes
+X0 = L / 2 + 0.05       # centre of the first column
 RAGGIO_DIFETTO = 0.27
 Y = {"meg": 6.2, "cap4": 3.2, "cap5": 0.7}
-TESTO = 10.5            # corpo del testo nei riquadri
+TESTO = 10.5            # body text in the boxes
 
 STILI = {
     "meg": dict(fc="0.97", ec="0.65", ls="--"),
@@ -63,15 +63,15 @@ def riquadro(asse, colonna, corsia, testo, stile=None):
 
 
 def etichetta_corsia(asse, corsia, testo):
-    """Nome della corsia sopra il primo riquadro, allineato a sinistra."""
+    """Lane name above the first box, left-aligned."""
     asse.text(X0 - L / 2, Y[corsia] + H / 2 + 0.2, testo, ha="left", va="bottom", fontsize=11,
               fontweight="bold", linespacing=1.15, color=GRIGIO_SCURO if corsia != "meg" else GRIGIO_MEDIO)
 
 
 def difetti(asse, colonna, corsia, numeri):
-    """Cerchi numerati appena sopra il riquadro, allineati a destra."""
+    """Numbered circles just above the box, right-aligned."""
     x = X0 + colonna * PASSO + L / 2 - 0.3
-    y = Y[corsia] + H / 2 + RAGGIO_DIFETTO + 0.04  # appena sopra il riquadro, senza coprire il testo
+    y = Y[corsia] + H / 2 + RAGGIO_DIFETTO + 0.04  # just above the box, without covering the text
     for k, numero in enumerate(reversed(numeri)):
         xc = x - k * (2 * RAGGIO_DIFETTO + 0.1)
         asse.add_patch(plt.Circle((xc, y), RAGGIO_DIFETTO, facecolor=GRIGIO_SCURO, edgecolor="white",
@@ -96,12 +96,12 @@ def main():
     applica_stile()
     fig, asse = plt.subplots(figsize=(10, 5.0))
 
-    # etichette di corsia
+    # lane labels
     etichetta_corsia(asse, "meg", "Tentativo MEG (cap. 4)")
     etichetta_corsia(asse, "cap4", "Riproduzione\n(cap. 4)")
     etichetta_corsia(asse, "cap5", "Estensione (cap. 5)")
 
-    # corsia MEG
+    # MEG lane
     riquadro(asse, 0, "meg", "Dati MEG\ndel consorzio")
     riquadro(asse, 1, "meg", "Preprocessing\nriprodotto\n(3 soggetti)")
     riquadro(asse, 2, "meg", "Ricostruzione\ndelle sorgenti\ne GED")
@@ -110,7 +110,7 @@ def main():
     asse.text(X0 + 3 * PASSO - L / 2, Y["meg"], "interrotto: memoria insufficiente\nsu portatile (8 GB),\nColab e Kaggle",
               ha="left", va="center", fontsize=TESTO, linespacing=1.2, color="0.35", style="italic")
 
-    # corsia cap. 4
+    # chapter 4 lane
     riquadro(asse, 0, "cap4", "Dati iEEG\n38 pazienti, 3 siti\ncodice e Methods", stile="dati")
     riquadro(asse, 1, "cap4", "Preprocessing\n38 pazienti")
     riquadro(asse, 2, "cap4", "Selettivit\u00e0\ndi categoria\n(criterio del testo)")
@@ -122,7 +122,7 @@ def main():
     difetti(asse, 2, "cap4", [4])
     difetti(asse, 3, "cap4", [5, 6])
 
-    # corsia cap. 5: dagli elettrodi selettivi del cap. 4
+    # chapter 5 lane: from the selective electrodes of chapter 4
     riquadro(asse, 2, "cap5", "LZC pre-stimolo\n(\u22120,5\u20130 s) negli\nelettrodi selettivi")
     riquadro(asse, 3, "cap5", "Prove divise\nin LZC alta\ne bassa (mediana)")
     riquadro(asse, 4, "cap5", "DFC in ogni met\u00e0,\ntest a cluster\nalta contro bassa")
@@ -131,7 +131,7 @@ def main():
     x_sel = X0 + 2 * PASSO
     freccia(asse, (x_sel, Y["cap4"] - H / 2), (x_sel, Y["cap5"] + H / 2))
 
-    # dal MEG all'iEEG: il cambio di dataset (a destra dell'etichetta della corsia)
+    # from MEG to iEEG: the change of dataset (to the right of the lane label)
     x_cambio = X0 + L / 2 - 0.35
     freccia(asse, (x_cambio, Y["meg"] - H / 2), (x_cambio, Y["cap4"] + H / 2 + 0.02), colore="0.6",
             tratteggio="--")

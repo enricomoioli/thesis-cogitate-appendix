@@ -3,18 +3,18 @@
 """
 03_sintesi_tabella_sincronia.py
 
-Estrae dai file .npz del consorzio, per ciascuna regione e categoria, tutto cio'
-che serve alle tabelle del cap. 4: elettrodi selettivi, pazienti, p minimo,
-percentuale di celle significative, banda di frequenza e finestre temporali
-dei cluster (tempi in cui almeno una frequenza e' significativa), e direzione
-dell'effetto (preferita - altra) dentro le celle significative.
+Extracts from the consortium .npz files, for each region and category, everything
+needed for the tables of chapter 4: selective electrodes, patients, minimum p,
+percentage of significant cells, frequency band and time windows of the clusters
+(times at which at least one frequency is significant), and direction of the
+effect (preferred - other) within the significant cells.
 
-Convenzione degli indici (synchrony_master.py): secondo indice = categoria
-letterale del trial (1 = volti, 2 = oggetti). Trial preferiti: cat1_to_cat1 per
-gli elettrodi-volti, cat2_to_cat2 per gli elettrodi-oggetti.
+Index convention (synchrony_master.py): second index = literal category of the
+trial (1 = faces, 2 = objects). Preferred trials: cat1_to_cat1 for face
+electrodes, cat2_to_cat2 for object electrodes.
 
-Uso (ambiente cogitate_ecog):
-    python D:\\TESI\\manoscritto\\cap4\\scripts\\03_sintesi_tabella_sincronia.py NOME_ANALISI
+Usage (environment cogitate_ecog):
+    python D:\\TESI\\manoscritto\\cap4\\scripts\\03_sintesi_tabella_sincronia.py ANALYSIS_NAME
 """
 import sys
 from pathlib import Path

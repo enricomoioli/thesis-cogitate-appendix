@@ -2,18 +2,18 @@
 """
 13_figura_confronto_alto_basso_pendenza.py
 
-Figura 5.3: V1/V2, elettrodi selettivi per gli oggetti, confronto fra
-le due versioni dell'analisi dello stato pre-stimolo.
-  A: differenza fra prove con LZC alta e bassa nell'effetto di categoria
-     (volti meno oggetti), come nella figura 5.1, pannello B (scala +-0,05);
-  B: pendenza nelle prove con volti meno pendenza nelle prove con oggetti, con la
-     LZC continua standardizzata (scala +-0,02).
-Ogni pannello ha la sua scala (unita' diverse) e il contorno del proprio cluster.
+Figure 5.3: V1/V2, object-selective electrodes, comparison between the two
+versions of the pre-stimulus state analysis.
+  A: difference between trials with high and low LZC in the category effect
+     (faces minus objects), as in figure 5.1, panel B (scale +-0.05);
+  B: slope in face trials minus slope in object trials, with continuous
+     standardized LZC (scale +-0.02).
+Each panel has its own scale (different units) and the outline of its own cluster.
 
-Sola lettura dei risultati degli script 21 e 22.
+Reads only the results of scripts 21 and 22.
 Output: figure_tesi\\output\\cap5\\confronto_alto_basso_pendenza.png/.pdf
 
-Uso (dalla cartella figure_tesi\\scripts):
+Usage (from the folder figure_tesi\\scripts):
     python 13_figura_confronto_alto_basso_pendenza.py
 """
 
@@ -31,13 +31,13 @@ ALTO_BASSO = Path(r"D:\TESI\manoscritto\extension\results\stato_prestimolo\stati
 PENDENZA = Path(r"D:\TESI\manoscritto\extension\results\pendenza\statistica_pendenza.npz")
 USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\cap5")
 
-FINESTRA_TEMPO = (-0.5, 2.0)   # come le figure 4.3 e 5.1
-# fattore di ingrandimento del testo: nel PDF la figura viene ridotta alla
-# larghezza della pagina, quindi il testo va ingrandito di conseguenza
+FINESTRA_TEMPO = (-0.5, 2.0)   # as in figures 4.3 and 5.1
+# text magnification factor: in the PDF the figure is shrunk to the
+# page width, so the text must be enlarged accordingly
 SCALA = 1.3
 DIMENSIONE_TITOLI = 10 * SCALA
 
-# (file, chiave dei valori, limite della scala, titolo, etichetta della barra)
+# (file, key of the values, scale limit, title, colour bar label)
 PANNELLI = [(ALTO_BASSO, "iit_cat2_differenza", 0.05, "LZC divisa sulla mediana: alta \u2212 bassa",
              "\u0394DFC (volti \u2212 oggetti), alta \u2212 bassa"),
             (PENDENZA, "iit_cat2_modulazione", 0.02, "LZC continua: pendenza volti \u2212 oggetti",

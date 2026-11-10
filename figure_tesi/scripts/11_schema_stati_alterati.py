@@ -2,20 +2,20 @@
 """
 11_schema_stati_alterati.py
 
-Schema per il cap. 8 (sezione "Direzioni future: oltre la meditazione, un
-ventaglio di stati alterati"): gli otto stati discussi, nell'ordine in cui
-il testo li presenta, che il testo stesso dichiara come gradiente di peso
-evidenziale, dal caso universale e meglio documentato (il sonno) a
-un'anomalia riferita su pochi casi (il tukdam).
+Diagram for the discussion chapter (section on future directions: beyond
+meditation, a range of altered states): the eight states discussed, in the
+order in which the text presents them, which the text itself declares to be
+a gradient of evidential weight, from the universal and best documented case
+(sleep) to an anomaly reported in a few cases (tukdam).
 
-Per ciascuno: che cosa offre alla disputa e su che cosa poggia, parafrasati
-dal testo. Nessuna grandezza numerica e nessuna posizione su assi: l'ordine
-e' l'unica informazione, ed e' quella del testo. L'intensita' del grigio
-segue l'ordine, solo come guida visiva.
+For each: what it offers to the dispute and what it rests on, paraphrased
+from the text. No numerical quantity and no position on axes: the order is
+the only information, and it is that of the text. The intensity of the grey
+follows the order, only as a visual guide.
 
 Output: figure_tesi\\output\\schemi\\schema_stati_alterati.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\11_schema_stati_alterati.py
 """
 
@@ -74,7 +74,7 @@ def main():
         asse.text(x + L / 2, y - 2.17, base, ha="center", va="center", fontsize=8.2, style="italic",
                   color=GRIGIO_SCURO, linespacing=1.2)
 
-    # gradiente: freccia sotto le due righe
+    # gradient: arrow below the two rows
     y_freccia = -PASSO_Y - H - 0.45
     larghezza = (PER_RIGA - 1) * PASSO_X + L
     asse.annotate("", xy=(larghezza, y_freccia), xytext=(0, y_freccia),

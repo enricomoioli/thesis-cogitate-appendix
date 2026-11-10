@@ -2,31 +2,31 @@
 """
 03_schema_paradigma.py
 
-Schema del paradigma sperimentale di COGITATE per il cap. 3, con lo stile
-comune (stile_tesi.py). Contenuti dai Methods e dalla Fig. 1c-d di
+Diagram of the COGITATE experimental paradigm for chapter 3, with the common
+style (stile_tesi.py). Contents from the Methods and from Fig. 1c-d of
 Cogitate Consortium (2025):
 
-- quattro categorie di stimolo (volti, oggetti, lettere, falsi caratteri),
-  20 identita' ciascuna, tre orientamenti (sinistra, fronte, destra), tre
-  durate (0,5, 1,0, 1,5 s);
-- prova di 2,0 s in tutto (stimolo + schermo vuoto), poi, per MEG e iEEG,
-  un intervallo casuale di 0,2-2,0 s (media 0,4 s);
-- blocchi: i bersagli appartengono a due categorie (volto-oggetto oppure
-  lettera-falso carattere), che diventano rilevanti per il compito; le
-  altre due sono irrilevanti. Le prove irrilevanti sono quelle usate nelle
-  analisi di questa tesi.
+- four stimulus categories (faces, objects, letters, false fonts),
+  20 identities each, three orientations (left, front, right), three
+  durations (0.5, 1.0, 1.5 s);
+- trial of 2.0 s in total (stimulus + blank screen), then, for MEG and iEEG,
+  a random interval of 0.2-2.0 s (mean 0.4 s);
+- blocks: the targets belong to two categories (face-object or
+  letter-false font), which become task-relevant; the other two are
+  task-irrelevant. The irrelevant trials are those used in the analyses of
+  this thesis.
 
-Pannello A: stimoli originali dell'esperimento (stessa fonte della Fig. 1c),
-copiati in figure_tesi\\stimoli_cogitate\\ dal repository del consorzio
-cogitate-experiment-code, ramo ECOG-Exp1 (provenienza file per file in
-FONTE.txt). Crediti, come nella legenda della Fig. 1 dell'articolo: oggetti
-per cortesia di Michael J. Tarr (Carnegie Mellon University,
-http://www.tarrlab.org/); volti creati con FaceGen Modeler 3.1.
-Solo grigi (rosso e blu restano alle teorie).
+Panel A: original stimuli of the experiment (same source as Fig. 1c),
+copied to figure_tesi\\stimoli_cogitate\\ from the consortium repository
+cogitate-experiment-code, branch ECOG-Exp1 (file-by-file provenance in
+FONTE.txt). Credits, as in the legend of Fig. 1 of the article: objects
+courtesy of Michael J. Tarr (Carnegie Mellon University,
+http://www.tarrlab.org/); faces created with FaceGen Modeler 3.1.
+Greys only (red and blue are reserved for the theories).
 
 Output: figure_tesi\\output\\schemi\\schema_paradigma.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\03_schema_paradigma.py
 """
 
@@ -43,16 +43,16 @@ from stile_tesi import GRIGIO_SCURO, GRIGIO_MEDIO, GRIGIO_CHIARO, applica_stile,
 USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\schemi\schema_paradigma")
 STIMOLI = Path(r"D:\TESI\manoscritto\figure_tesi\stimoli_cogitate")
 
-# fattore di ingrandimento del testo: la figura e' larga 13 pollici e nel PDF
-# viene ridotta a circa la meta', quindi il testo va ingrandito di conseguenza
+# text magnification factor: the figure is 13 inches wide and in the PDF
+# it is shrunk to about half, so the text must be enlarged accordingly
 SCALA = 1.5
 
 DURATE = (0.5, 1.0, 1.5)
 DURATA_PROVA = 2.0
-ITI = (0.2, 2.0)  # MEG e iEEG; media 0,4 s
+ITI = (0.2, 2.0)  # MEG and iEEG; mean 0.4 s
 
 
-# --- stimoli originali, ciascuno in un riquadro unitario centrato in (x, y) ---
+# --- original stimuli, each in a unit box centred at (x, y) ---
 
 def cornice(asse, x, y, lato=1.0):
     asse.add_patch(FancyBboxPatch((x - lato / 2, y - lato / 2), lato, lato,
@@ -61,7 +61,7 @@ def cornice(asse, x, y, lato=1.0):
 
 
 def stimolo(asse, x, y, nome_file, lato=0.9):
-    """Immagine originale (PNG con trasparenza) dentro il riquadro."""
+    """Original image (PNG with transparency) inside the box."""
     immagine = mpimg.imread(str(STIMOLI / nome_file))
     asse.imshow(immagine, extent=(x - lato / 2, x + lato / 2, y - lato / 2, y + lato / 2),
                 interpolation="lanczos", zorder=3)
@@ -97,7 +97,7 @@ def pannello_prova(asse):
         asse.add_patch(Rectangle((0, y - 0.3), durata, 0.6, facecolor="0.55", edgecolor="none"))
         asse.add_patch(Rectangle((durata, y - 0.3), DURATA_PROVA - durata, 0.6, facecolor="0.92",
                                  edgecolor="none"))
-        # intervallo casuale: almeno ITI[0] (pieno chiaro), poi variabile fino a ITI[1] (tratteggiato)
+        # random interval: at least ITI[0] (solid, light), then variable up to ITI[1] (dashed)
         asse.add_patch(Rectangle((DURATA_PROVA, y - 0.3), ITI[0], 0.6, facecolor="0.92", edgecolor="none"))
         asse.add_patch(Rectangle((DURATA_PROVA + ITI[0], y - 0.3), ITI[1] - ITI[0], 0.6, facecolor="white",
                                  edgecolor=GRIGIO_CHIARO, hatch="////", linewidth=0.6))

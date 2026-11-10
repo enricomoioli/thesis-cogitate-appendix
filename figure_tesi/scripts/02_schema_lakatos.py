@@ -2,20 +2,20 @@
 """
 02_schema_lakatos.py
 
-Schema didattico del modello di Lakatos per il cap. 2 (sezione sul
-falsificazionismo sofisticato), su un programma di ricerca ipotetico:
-nucleo, cintura protettiva di ipotesi ausiliarie, predizioni sul bordo.
-Un'anomalia colpisce una predizione senza raggiungere il nucleo; si modifica
-un'ipotesi ausiliaria, e le due risposte possibili sono quelle definite nel
-testo del cap. 2:
-- progressiva: la modifica predice fatti nuovi;
-- degenerativa: la modifica accomoda solo l'anomalia.
+Didactic diagram of Lakatos's model for chapter 2 (section on sophisticated
+falsificationism), on a hypothetical research programme: hard core,
+protective belt of auxiliary hypotheses, predictions on the edge.
+An anomaly hits a prediction without reaching the core; an auxiliary
+hypothesis is modified, and the two possible responses are those defined in
+the text of chapter 2:
+- progressive: the modification predicts novel facts;
+- degenerating: the modification only accommodates the anomaly.
 
-Programma ipotetico, quindi solo grigi (rosso e blu restano alle teorie).
+Hypothetical programme, hence greys only (red and blue are reserved for the theories).
 
 Output: figure_tesi\\output\\schemi\\schema_lakatos.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\02_schema_lakatos.py
 """
 
@@ -27,8 +27,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, FancyBboxPatch
 
-# fattore di ingrandimento del testo: nel PDF la figura viene ridotta alla
-# larghezza della pagina, quindi il testo va ingrandito di conseguenza
+# text magnification factor: in the PDF the figure is shrunk to the
+# page width, so the text must be enlarged accordingly
 SCALA = 1.4
 
 from stile_tesi import GRIGIO_SCURO, applica_stile, salva
@@ -66,7 +66,7 @@ def main():
                                 "legend.fontsize": 9 * SCALA})
     fig, asse = plt.subplots(figsize=(12, 6.2))
 
-    # programma di ricerca
+    # research programme
     asse.add_patch(Circle((0, 0), R_CINTURA, facecolor="0.93", edgecolor=GRIGIO_SCURO, linewidth=1.2))
     asse.add_patch(Circle((0, 0), R_NUCLEO, facecolor="0.72", edgecolor=GRIGIO_SCURO, linewidth=1.2))
     asse.text(0, 0.12, "Nucleo", ha="center", va="center", fontsize=11 * SCALA, fontweight="bold")
@@ -85,7 +85,7 @@ def main():
                   fontsize=9 * SCALA, color=GRIGIO_SCURO,
                   arrowprops=dict(arrowstyle="-", color=GRIGIO_SCURO, linewidth=0.8))
 
-    # anomalia: arriva dall'esterno e colpisce una predizione (punto pieno), senza raggiungere il nucleo
+    # anomaly: comes from outside and hits a prediction (filled dot), without reaching the core
     x_colpita, y_colpita = polare(R_CINTURA, ANGOLO_ANOMALIA)
     asse.plot(x_colpita, y_colpita, "o", markersize=9, color="k", zorder=4)
     inizio = (x_colpita + 0.9, y_colpita + 2.0)
@@ -94,7 +94,7 @@ def main():
     asse.text(inizio[0], inizio[1] + 0.1, "anomalia", ha="center", va="bottom",
               fontsize=10 * SCALA, fontweight="bold")
 
-    # due risposte possibili
+    # two possible responses
     x_bivio, y_bivio = 7.0, 0
     riquadro(asse, x_bivio, y_bivio, "si modifica\nun'ipotesi ausiliaria", larghezza=3.7)
     freccia(asse, (x_colpita + 0.2, y_colpita - 0.1), (x_bivio - 1.85, y_bivio))

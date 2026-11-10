@@ -2,27 +2,27 @@
 """
 10_schema_lakatos_cogitate.py
 
-Lo schema del modello di Lakatos del cap. 2 (02_schema_lakatos.py),
-applicato alle due teorie di COGITATE per il cap. 6 (sezione "La replica
-di GNWT, e cosa insegna sulla cintura protettiva"): due programmi
-affiancati, ciascuno con l'anomalia che lo studio gli ha opposto e la
-risposta dei proponenti, come riportate nel testo.
+The diagram of Lakatos's model from chapter 2 (02_schema_lakatos.py),
+applied to the two COGITATE theories for chapter 6 (section "La replica
+di GNWT, e cosa insegna sulla cintura protettiva"): two programmes side by
+side, each with the anomaly the study raised against it and the
+proponents' response, as reported in the text.
 
-- IIT: anomalia sulla terza predizione (nessuna sincronizzazione sostenuta
-  nella corteccia posteriore con la misura preregistrata); risposta: troppo
-  pochi elettrodi sulle aree posteriori (cap. 2, da Negro 2024), cioe' una
-  modifica di un'ipotesi ausiliaria sul disegno.
-- GNWT: anomalia sulla seconda predizione (nessuna ignition allo
-  spegnimento dello stimolo); risposta: l'ignition all'offset non sarebbe
-  mai stata una predizione del nucleo (cap. 6, da Naccache et al. 2025),
-  cioe' un nuovo confine fra nucleo e cintura.
+- IIT: anomaly on the third prediction (no sustained synchronization in the
+  posterior cortex with the preregistered measure); response: too few
+  electrodes in posterior areas (chapter 2, from Negro 2024), i.e. a
+  change to an auxiliary hypothesis about the design.
+- GNWT: anomaly on the second prediction (no ignition at stimulus offset);
+  response: offset ignition was never a prediction of the core
+  (chapter 6, from Naccache et al. 2025), i.e. a new boundary between core
+  and belt.
 
-Testi parafrasati dal testo della tesi, non citazioni. Colori delle teorie
-da stile_tesi.py; tutto il resto in grigio.
+Texts paraphrased from the thesis, not quotations. Theory colours from
+stile_tesi.py; everything else in grey.
 
 Output: figure_tesi\\output\\schemi\\schema_lakatos_cogitate.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\10_schema_lakatos_cogitate.py
 """
 
@@ -91,7 +91,7 @@ def programma(asse, p):
         asse.plot(x, y, "o", markersize=7, markerfacecolor="white", markeredgecolor=colore,
                   markeredgewidth=1.3, zorder=3)
 
-    # anomalia: colpisce una predizione sul bordo, non raggiunge il nucleo
+    # anomaly: hits a prediction on the edge, does not reach the core
     xc, yc = polare(cx, R_CINTURA, ANGOLO_ANOMALIA)
     asse.plot(xc, yc, "o", markersize=8.5, color="k", zorder=4)
     inizio = (xc + 1.7, yc + 1.55)
@@ -102,7 +102,7 @@ def programma(asse, p):
     asse.text(inizio[0] + 0.1, inizio[1] + 1.12, "anomalia", ha="left", va="bottom", fontsize=9.5,
               fontweight="bold")
 
-    # risposta dei proponenti, sotto il programma
+    # proponents' response, below the programme
     y_risposta = -R_CINTURA - 1.85
     riquadro(asse, cx, y_risposta, p["risposta"], p["mossa"])
     asse.annotate("", xy=(cx, y_risposta + 1.07), xytext=(cx, -R_CINTURA),

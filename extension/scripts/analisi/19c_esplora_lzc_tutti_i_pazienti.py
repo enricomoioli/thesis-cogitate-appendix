@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-19c - Esplorazione della LZC pre-stimolo su TUTTI i pazienti con elettrodi selettivi.
+19c - Exploration of pre-stimulus LZC in ALL patients with selective electrodes.
 
-Scopo: decidere se dividere le prove per elettrodo (come Li et al. 2020) o per
-paziente (LZC media dei suoi elettrodi selettivi). Guarda SOLO la LZC, mai la DFC.
+Purpose: decide whether to split the trials by electrode (as Li et al. 2020) or by
+patient (mean LZC of the patient's selective electrodes). Looks ONLY at LZC, never
+at the DFC.
 
-Per ogni paziente:
-  1. lancia lo script 19b (stessa LZC, stesse prove, stesse esclusioni), salvando
-     il suo output in un file di log;
-  2. dalla tabella prova per prova del 19b calcola la correlazione (Spearman) della
-     LZC fra ogni coppia di elettrodi selettivi del paziente, sulle prove NON escluse:
-     se e' alta, gli elettrodi "salgono e scendono insieme" (stato condiviso);
-     se e' bassa, ogni elettrodo ha il suo stato.
-     La correlazione e' riportata anche separando coppie con la stessa preferenza
-     (volti-volti, oggetti-oggetti) e con preferenza diversa (come Li et al. 2020).
+For each patient:
+  1. runs script 19b (same LZC, same trials, same exclusions), saving its output
+     in a log file;
+  2. from the trial-by-trial table of 19b computes the correlation (Spearman) of
+     LZC between each pair of the patient's selective electrodes, on the trials
+     NOT excluded: if it is high, the electrodes "go up and down together"
+     (shared state); if it is low, each electrode has its own state.
+     The correlation is also reported separately for pairs with the same
+     preference (faces-faces, objects-objects) and with different preference
+     (as Li et al. 2020).
 
-Alla fine salva e stampa una tabella riassuntiva.
+At the end it saves and prints a summary table.
 
-Uso (prompt cogitate_ecog, dalla cartella dello script):
+Usage (cogitate_ecog prompt, from the script folder):
     python 19c_esplora_lzc_tutti_i_pazienti.py
 """
 import subprocess
@@ -34,14 +36,14 @@ CARTELLA_EL = Path(r"E:/raw/ieeg_bids/derivatives/synchrony_analysis/sub-super/s
                    r"category_faces_objects_synchrony_dfc_tfr_irrelevant_no_act_catsel_textaligned_v1v2d/"
                    r"desbadcharej_notfil_lapref")
 
-# ---------------------------------------------------------------- pazienti con elettrodi selettivi
+# ---------------------------------------------------------------- patients with selective electrodes
 el = pd.concat([pd.read_pickle(CARTELLA_EL / f"sub-super_ses-1_task-Dur_ana-synchrony_analysis_{r}_dfc_tfr_electrodes.tar.gz",
                                compression="gzip") for r in ["iit", "gnw"]])
 el = el[(el["face"] == True) | (el["object"] == True)].drop_duplicates(subset=["channels"])
 pazienti = sorted(el["channels"].astype(str).str.split("-").str[0].unique())
 print(f"Pazienti con elettrodi selettivi: {len(pazienti)}")
 
-# ---------------------------------------------------------------- 1. 19b su ciascun paziente
+# ---------------------------------------------------------------- 1. 19b on each patient
 for i, paz in enumerate(pazienti, 1):
     log = RISULTATI / f"log_19b_{paz}.txt"
     log.parent.mkdir(parents=True, exist_ok=True)
@@ -51,7 +53,7 @@ for i, paz in enumerate(pazienti, 1):
     log.write_text(r.stdout + "\n" + r.stderr, encoding="utf-8")
     print("ok" if r.returncode == 0 else f"ERRORE (vedi {log.name})")
 
-# ---------------------------------------------------------------- 2. riepilogo e correlazioni fra elettrodi
+# ---------------------------------------------------------------- 2. summary and correlations between electrodes
 righe = []
 for paz in pazienti:
     f_prove = RISULTATI / paz / f"{paz}_lzc_prestimolo.csv"

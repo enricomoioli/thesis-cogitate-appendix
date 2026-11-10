@@ -1,21 +1,21 @@
 """
-Preprocessing in loop su tutti i soggetti iEEG gia' scaricati.
+Preprocessing in a loop over all iEEG subjects already downloaded.
 
-AMBIENTE: cogitate_ecog  (NON ieeg_release)
+ENVIRONMENT: cogitate_ecog  (NOT ieeg_release)
 
-USO:
+USAGE:
     conda activate cogitate_ecog
     python D:\\TESI\\manoscritto\\cap4\\scripts\\02_preprocessing_tutti_soggetti.py
 
-Ogni soggetto viene lanciato come processo separato: se uno fallisce, il loop
-prosegue con i successivi invece di fermarsi. Alla fine stampa il riepilogo e
-lo scrive anche in un file di log accanto a questo script.
+Each subject is launched as a separate process: if one fails, the loop moves
+on to the next ones instead of stopping. At the end it prints a summary and
+also writes it to a log file.
 
-E' ripartibile: i soggetti gia' preprocessati vengono saltati (viene cercato
-il file di epoching in high_gamma come prova di completamento).
+It can be restarted: subjects already preprocessed are skipped (the high_gamma
+epoching file is used as proof of completion).
 
-Tempo atteso: circa 13 minuti per soggetto sul portatile, misurato su CF102.
-Con 38 soggetti sono circa 8 ore.
+Expected time: about 13 minutes per subject on the laptop, measured on CF102.
+With 38 subjects that is about 8 hours.
 """
 
 import os
@@ -25,7 +25,7 @@ from datetime import datetime
 from pathlib import Path
 
 # --------------------------------------------------------------------------
-# Percorsi: da adattare se cambia la lettera del disco esterno
+# Paths: adapt them if the drive letter of the external disk changes
 # --------------------------------------------------------------------------
 BIDS_ROOT = Path("E:/raw/ieeg_bids")
 IEEG_CODE = Path("D:/TESI/cogitate-msp1/coglib/ieeg")
@@ -38,16 +38,16 @@ TASK = "Dur"
 PREPROC_STEPS = "desbadcharej_notfil_lapref"
 
 # --------------------------------------------------------------------------
-# PYTHONPATH: i moduli locali del repository non sono pacchetti pip,
-# va impostato o gli import falliscono. Lo mettiamo qui invece di
-# affidarci al fatto che l'utente se lo ricordi.
+# PYTHONPATH: the local modules of the repository are not pip packages,
+# so it must be set or the imports fail. It is set here instead of
+# relying on the user to remember it.
 # --------------------------------------------------------------------------
 env = os.environ.copy()
 env["PYTHONPATH"] = str(IEEG_CODE)
 
 
 def gia_preprocessato(subject):
-    """True se esiste gia' il file di epoching high_gamma per questo soggetto."""
+    """True if the high_gamma epoching file already exists for this subject."""
     atteso = (BIDS_ROOT / "derivatives" / "preprocessing" / f"sub-{subject}" /
               f"ses-{SESSION}" / "ieeg" / "epoching" / "high_gamma" / PREPROC_STEPS /
               f"sub-{subject}_ses-{SESSION}_task-{TASK}_desc-epoching_ieeg-epo.fif")
@@ -55,7 +55,7 @@ def gia_preprocessato(subject):
 
 
 def trova_soggetti():
-    """Elenca i soggetti scaricati, dai nomi delle cartelle sub-* nel BIDS root."""
+    """List the downloaded subjects, from the names of the sub-* folders in the BIDS root."""
     if not BIDS_ROOT.is_dir():
         print(f"ERRORE: {BIDS_ROOT} non esiste. Il disco esterno e' collegato?")
         sys.exit(1)
@@ -66,7 +66,7 @@ def trova_soggetti():
 
 
 def main():
-    # Controlli preliminari, meglio fallire subito che a meta' notte
+    # Preliminary checks: better to fail now than in the middle of the night
     for percorso, descrizione in [(CONFIG, "file di configurazione"),
                                   (MASTER, "script di preprocessing")]:
         if not percorso.is_file():
@@ -100,10 +100,10 @@ def main():
         print(f"[{i}/{len(da_fare)}] {subject} - avvio alle {datetime.now():%H:%M:%S}")
         print("=" * 70)
         inizio = datetime.now()
-        # Cartella dove finiscono gli output completi per soggetto: senza questi,
-        # in caso di fallimento resta solo il returncode e non si capisce nulla.
-        # (lezione del 6 settembre: 33 soggetti falliti, tutti con returncode 1,
-        #  e nessuna traccia del motivo)
+        # Folder for the full output of each subject: without it, a failure
+        # leaves only the returncode and no way to understand what happened.
+        # (lesson of 6 September: 33 subjects failed, all with returncode 1,
+        #  and no trace of the reason)
         cartella_output = LOG.parent / "output_preprocessing"
         cartella_output.mkdir(exist_ok=True)
         file_output = cartella_output / f"{subject}.txt"
@@ -121,9 +121,9 @@ def main():
                 riusciti.append(subject)
                 print(f">>> {subject}: RIUSCITO in {durata:.1f} minuti")
             else:
-                # Recupera l'ultima riga significativa dell'output, di solito
-                # e' il messaggio dell'eccezione: cosi' il riepilogo finale dice
-                # subito che tipo di errore e', senza aprire i file uno per uno.
+                # Retrieve the last meaningful line of the output, usually the
+                # exception message: this way the final summary says right away
+                # what kind of error it is, without opening the files one by one.
                 motivo = f"returncode {esito.returncode}"
                 try:
                     righe_output = file_output.read_text(encoding="utf-8", errors="replace").splitlines()
@@ -143,7 +143,7 @@ def main():
     durata_totale = (datetime.now() - inizio_totale).total_seconds() / 60
 
     # ----------------------------------------------------------------------
-    # Riepilogo a schermo e su file
+    # Summary on screen and in a file
     # ----------------------------------------------------------------------
     righe = []
     righe.append(f"Preprocessing concluso il {datetime.now():%Y-%m-%d %H:%M}")

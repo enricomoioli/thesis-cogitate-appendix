@@ -2,19 +2,19 @@
 """
 22_statistica_pendenza.py
 
-Cap. 5, versione con la LZC continua (preregistrazione
-extension/preregistrazione_cap5_pendenza.md, 29 ottobre 2026).
+Chapter 5, version with continuous LZC (preregistration
+extension/preregistrazione_cap5_pendenza.md, 29 October 2026).
 
-Legge le pendenze della DFC sulla LZC pre-stimolo standardizzata prodotte da
-synchrony_master_pendenza.py (file ..._pendenza.npz) e, per ogni elettrodo
-selettivo, calcola pendenza nelle prove con volti meno pendenza nelle prove con
-oggetti. Su questa differenza: cluster test come nel cap. 4 (con seme fisso) nei
-quattro insiemi, poi la stessa cosa con il paziente come unita'.
+Reads the slopes of DFC on standardized pre-stimulus LZC produced by
+synchrony_master_pendenza.py (files ..._pendenza.npz) and, for each selective
+electrode, computes the slope in face trials minus the slope in object trials.
+On this difference: cluster test as in chapter 4 (with a fixed seed) in the
+four sets, then the same with the patient as unit.
 
-Celle da eseguire in ordine in Spyder.
+Cells to run in order in Spyder.
 """
 
-# %% Cella 1: percorsi e caricamento
+# %% Cell 1: paths and loading
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -35,19 +35,19 @@ for regione in ["iit", "gnw"]:
     dati[regione] = np.load(CARTELLA / (INIZIO + regione + "_dfc_tfr_pendenza.npz"), allow_pickle=True)
 
 print(list(dati["gnw"].keys()))
-print(dati["gnw"]["categories"])          # atteso: ['face' 'object']
+print(dati["gnw"]["categories"])          # expected: ['face' 'object']
 
-# %% Cella 2: modulazione dell'effetto di categoria
+# %% Cell 2: modulation of the category effect
 def modulazione(d, cat):
-    """cat = "1" (elettrodi selettivi per i volti) o "2" (per gli oggetti).
-    Pendenza nelle prove con volti meno pendenza nelle prove con oggetti.
-    Restituisce elettrodi x frequenze x tempo."""
+    """cat = "1" (face-selective electrodes) or "2" (object-selective).
+    Slope in face trials minus slope in object trials.
+    Returns electrodes x frequencies x time."""
     return d["pendenza_cat" + cat + "_to_cat1"] - d["pendenza_cat" + cat + "_to_cat2"]
 
 prova = modulazione(dati["gnw"], "1")
 print(prova.shape, "nan:", np.isnan(prova).sum())
 
-# %% Cella 3: test a cluster (come nel cap. 4, con seme fissato)
+# %% Cell 3: cluster test (as in chapter 4, with a fixed seed)
 def test_cluster(differenza, nome, tempi, frequenze):
     n = differenza.shape[0]
     soglia = stats.t.ppf(1 - P_CLUSTER / 2, df=n - 1)
@@ -72,14 +72,14 @@ frequenze = dati["gnw"]["freqs"]
 INSIEMI = [("iit", "V1/V2", "1", "volti"), ("iit", "V1/V2", "2", "oggetti"),
            ("gnw", "prefrontale", "1", "volti"), ("gnw", "prefrontale", "2", "oggetti")]
 
-# %% Cella 4: test principale, quattro insiemi (unita' = elettrodo)
+# %% Cell 4: main test, four sets (unit = electrode)
 risultati = {}
 for regione, nome_regione, cat, nome_cat in INSIEMI:
     nome = nome_regione + ", elettrodi selettivi per " + nome_cat
     risultati[(regione, cat)] = test_cluster(modulazione(dati[regione], cat), nome, tempi, frequenze)
 
-# %% Cella 5: segno negli insiemi con un cluster (descrittivo)
-# Valori calcolati dentro il cluster, quindi descrivono la direzione, non la confermano.
+# %% Cell 5: sign in the sets with a cluster (descriptive)
+# Values computed inside the cluster, so they describe the direction, they do not confirm it.
 for regione, nome_regione, cat, nome_cat in INSIEMI:
     cluster = risultati[(regione, cat)] < 0.05
     if not cluster.any():
@@ -92,7 +92,7 @@ for regione, nome_regione, cat, nome_cat in INSIEMI:
           f"con oggetti {pend_oggetti:.4f}, differenza {pend_volti - pend_oggetti:.4f}")
     print(f"   elettrodi con differenza positiva: {(per_elettrodo > 0).sum()} su {len(per_elettrodo)}")
 
-# %% Cella 6: verifica per paziente (direzione e coerenza)
+# %% Cell 6: patient-level check (direction and consistency)
 def media_per_paziente(differenza, pazienti):
     pazienti = np.asarray(pazienti)
     elenco = np.unique(pazienti)
@@ -108,7 +108,7 @@ for regione, nome_regione, cat, nome_cat in INSIEMI:
         print("   nel cluster degli elettrodi:", dict(zip(elenco, np.round(nel_cluster, 4))))
         print(f"   pazienti con differenza positiva: {(nel_cluster > 0).sum()} su {len(elenco)}")
 
-# %% Cella 7: salvataggio dei risultati
+# %% Cell 7: saving the results
 da_salvare = {"tempi": tempi, "frequenze": frequenze}
 riepilogo = []
 for regione, nome_regione, cat, nome_cat in INSIEMI:

@@ -1,109 +1,117 @@
-# Appendice digitale della tesi
+# Digital appendix to the thesis
 
 **Adversarial collaboration, open science e riproducibilità nelle neuroscienze della coscienza.**
 **Il caso COGITATE: riproduzione della connettività interareale ed estensione allo stato pre-stimolo**
 
-Enrico Moioli, tesi di laurea magistrale in Processi Cognitivi e Tecnologie (LM-51), Università Telematica Internazionale Uninettuno, anno accademico 2025/2026.
+*(Adversarial collaboration, open science and reproducibility in the neuroscience of consciousness. The COGITATE case: reproduction of interareal connectivity and extension to the pre-stimulus state)*
 
-Questo repository è l'appendice della tesi: raccoglie gli script, le preregistrazioni e i risultati leggeri delle analisi descritte nei capitoli 4 e 5, e gli script di tutte le figure. Il testo della tesi non è incluso.
+Enrico Moioli, master's thesis in Cognitive Processes and Technologies (LM-51), Università Telematica Internazionale Uninettuno, academic year 2025/2026.
 
-La tesi parte dall'adversarial collaboration COGITATE, che ha messo a confronto la teoria dell'informazione integrata (IIT) e la teoria dello spazio di lavoro neuronale globale (GNWT) su dati fMRI, MEG e iEEG (Cogitate Consortium, *Nature*, 2025, doi:10.1038/s41586-025-08888-1), e si chiede che cosa diventi possibile quando dati e codice sono pubblici e li usa una persona esterna, con mezzi ordinari: un portatile con 8 GB di memoria.
+This repository is the appendix to the thesis: it collects the scripts, the preregistrations and the lightweight results of the analyses described in chapters 4 and 5, together with the scripts of all the figures. The text of the thesis is not included.
 
-## Che cosa contiene, capitolo per capitolo
+The thesis starts from the COGITATE adversarial collaboration, which compared integrated information theory (IIT) and global neuronal workspace theory (GNWT) on fMRI, MEG and iEEG data (Cogitate Consortium, *Nature*, 2025, doi:10.1038/s41586-025-08888-1), and asks what becomes possible when data and code are public and are used by an outsider with ordinary means: a laptop with 8 GB of memory.
 
-| Capitolo della tesi | Materiale in questo repository |
+## Language
+
+The thesis is written in Italian. In this repository the README, the code comments and the docstrings are in English; file and folder names, messages printed by the scripts and the labels inside the figures are in Italian, as in the thesis. The two preregistrations are kept in their original Italian version, which is binding, with an English translation alongside (`*_EN.md`).
+
+Main Italian terms in file names: *cap4* = chapter 4; *extension* = chapter 5; *analisi* = analysis; *pendenza* = slope; *stato prestimolo* = pre-stimulus state; *alto/basso* = high/low; *figure_tesi* = thesis figures; *schema* = diagram; *risultati, results* = results; *soggetti, pazienti* = subjects, patients; *elettrodi selettivi* = selective electrodes; *volti/oggetti* = faces/objects.
+
+## Contents, chapter by chapter
+
+| Chapter of the thesis | Material in this repository |
 |---|---|
-| 4, riproduzione dell'analisi di connettività (predizione 3) sui dati iEEG pubblici | `cap4/` |
-| 5, estensione originale: stato pre-stimolo (complessità di Lempel-Ziv) e connettività selettiva | `extension/` |
-| Tutte le figure, capitoli 1-7 | `figure_tesi/` |
+| 4, reproduction of the connectivity analysis (prediction 3) on the public iEEG data | `cap4/` |
+| 5, original extension: pre-stimulus state (Lempel-Ziv complexity) and selective connectivity | `extension/` |
+| All figures, chapters 1-7 | `figure_tesi/` |
 
-## Struttura
+## Structure
 
 ```
 cap4/
-  scripts/            download, preprocessing di tutti i pazienti, tabelle e mappe della sincronia (01-04)
-  log/                riepilogo del preprocessing dei 38 pazienti
-  soggetti_ieeg.md    elenco dei soggetti del rilascio pubblico
+  scripts/            download, preprocessing of all patients, synchrony tables and maps (01-04)
+  log/                summary of the preprocessing of the 38 patients
+  soggetti_ieeg.md    list of the subjects in the public release
 extension/
-  preregistrazione_cap5_stato_prestimolo.md
-  preregistrazione_cap5_pendenza.md
-  scripts/analisi/            esplorazione della LZC, assegnazione dello stato, statistica (19a-21)
-  scripts/analisi_pendenza/   versione di controllo con la LZC continua (22-23)
-  results/                    tabelle e risultati leggeri
+  preregistrazione_cap5_stato_prestimolo.md (+ _EN.md)
+  preregistrazione_cap5_pendenza.md (+ _EN.md)
+  scripts/analisi/            LZC exploration, state assignment, statistics (19a-21)
+  scripts/analisi_pendenza/   control version with continuous LZC (22-23)
+  results/                    tables and lightweight results
 figure_tesi/
-  scripts/            uno script per figura, più stile_tesi.py (stile comune)
-  output/             figure in PNG e PDF
-  stimoli_cogitate/   stimoli originali usati nello schema del paradigma (vedi FONTE.txt)
-ambienti/             ricette conda degli ambienti usati
+  scripts/            one script per figure, plus stile_tesi.py (common style)
+  output/             figures as PNG and PDF
+  stimoli_cogitate/   original stimuli used in the paradigm diagram (see FONTE.txt)
+ambienti/             conda recipes of the environments used
 ```
 
-## Il codice del consorzio
+## The consortium code
 
-Le analisi di connettività girano con il codice del consorzio (`cogitate-msp1`, licenza MIT), corretto come descritto nel capitolo 4. La versione modificata sta in un repository separato, un fork dell'originale: [collegamento da aggiungere]. Lì si trovano anche i due script derivati per il capitolo 5, `coglib/ieeg/synchrony/synchrony_master_stato.py` e `synchrony_master_pendenza.py`.
+The connectivity analyses run with the consortium code (`cogitate-msp1`, MIT licence), corrected as described in chapter 4. The modified version is in a separate repository, a fork of the original: [link to be added]. It also contains the two scripts derived for chapter 5, `coglib/ieeg/synchrony/synchrony_master_stato.py` and `synchrony_master_pendenza.py`.
 
-## Dati
+## Data
 
-Non inclusi. Sono i dati iEEG pubblici del consorzio COGITATE: 38 pazienti, formato BIDS, licenza CC BY 4.0, descritti in Seedat et al., *Scientific Data*, 2025, doi:10.1038/s41597-025-04833-z. Lo script `cap4/scripts/01_scarica_soggetti.py` li scarica, con le credenziali del proprio account.
+Not included. They are the public iEEG data of the COGITATE consortium: 38 patients, BIDS format, CC BY 4.0 licence, described in Seedat et al., *Scientific Data*, 2025, doi:10.1038/s41597-025-04833-z. The script `cap4/scripts/01_scarica_soggetti.py` downloads them, with the credentials of one's own account.
 
-Gli script contengono percorsi fissi: `D:\TESI\manoscritto\` per questo repository, `D:\TESI\cogitate-msp1\` per il codice del consorzio, `E:\raw\ieeg_bids\` per i dati. Chi li riusa deve cambiarli all'inizio di ciascuno script. I nomi delle cartelle dei risultati sotto `derivatives\` sono generati dal codice del consorzio.
+The scripts contain fixed paths: `D:\TESI\manoscritto\` for this repository, `D:\TESI\cogitate-msp1\` for the consortium code, `E:\raw\ieeg_bids\` for the data. Anyone reusing them must change these at the top of each script. The names of the result folders under `derivatives\` are generated by the consortium code.
 
-## Ambienti
+## Environments
 
-Le ricette sono in `ambienti/` (`conda env create -f nome.yml`).
+The recipes are in `ambienti/` (`conda env create -f name.yml`).
 
-| Ambiente | Uso |
+| Environment | Use |
 |---|---|
-| `ieeg_release` | download dei dati |
-| `cogitate_ecog` | codice del consorzio, analisi dei capitoli 4 e 5 |
-| installer MNE (`mne_installer.yml`) | mappa 3D degli elettrodi e figure |
+| `ieeg_release` | data download |
+| `cogitate_ecog` | consortium code, analyses of chapters 4 and 5 |
+| MNE installer (`mne_installer.yml`) | 3D electrode map and figures |
 
-## Capitolo 4: ordine di esecuzione
+## Chapter 4: order of execution
 
-1. `01_scarica_soggetti.py`: download dei 38 pazienti;
-2. `02_preprocessing_tutti_soggetti.py`: preprocessing del consorzio in ciclo, un processo per paziente, con riepilogo in `cap4/log/`;
-3. selettività di categoria e sincronia (DFC) con il codice del consorzio, nel fork;
-4. `03_sintesi_tabella_sincronia.py`: valori delle tabelle del capitolo 4;
-5. `04_mappa_tf_sincronia.py`: mappe tempo-frequenza di lavoro.
+1. `01_scarica_soggetti.py`: download of the 38 patients;
+2. `02_preprocessing_tutti_soggetti.py`: consortium preprocessing in a loop, one process per patient, with a summary in `cap4/log/`;
+3. category selectivity and synchrony (DFC) with the consortium code, in the fork;
+4. `03_sintesi_tabella_sincronia.py`: values of the chapter 4 tables;
+5. `04_mappa_tf_sincronia.py`: working time-frequency maps.
 
-## Capitolo 5: ordine di esecuzione
+## Chapter 5: order of execution
 
-1. `19a`, `19b`, `19c`: esplorazione della LZC pre-stimolo, fatta prima della preregistrazione e senza guardare la connettività;
-2. `20_assegna_stato_prestimolo.py`: divisione delle prove in LZC alta e bassa, per elettrodo;
-3. `synchrony_master_stato.py` (nel fork): connettività ricalcolata sulle due metà;
-4. `21_statistica_alto_basso.py`: test a cluster e controllo spettrale;
-5. versione di controllo con la LZC continua: `synchrony_master_pendenza.py` (nel fork), poi `22_statistica_pendenza.py` e `23_controllo_dfc_tutte_le_prove.py`.
+1. `19a`, `19b`, `19c`: exploration of pre-stimulus LZC, done before the preregistration and without looking at connectivity;
+2. `20_assegna_stato_prestimolo.py`: split of the trials into high and low LZC, per electrode;
+3. `synchrony_master_stato.py` (in the fork): connectivity recomputed on the two halves;
+4. `21_statistica_alto_basso.py`: cluster test and spectral control;
+5. control version with continuous LZC: `synchrony_master_pendenza.py` (in the fork), then `22_statistica_pendenza.py` and `23_controllo_dfc_tutte_le_prove.py`.
 
-Il seme delle permutazioni è fisso (0).
+The permutation seed is fixed (0).
 
-## Preregistrazione
+## Preregistration
 
-Criteri, parametri e regole di lettura del capitolo 5 sono stati fissati prima di eseguire i calcoli, in due documenti: `preregistrazione_cap5_stato_prestimolo.md` (27 ottobre 2026) e `preregistrazione_cap5_pendenza.md` (29 ottobre 2026). I primi due commit di questo repository li riproducono con le date originali. La cronologia pubblica è stata ricostruita da un repository di lavoro locale, che resta disponibile su richiesta.
+The criteria, parameters and interpretation rules of chapter 5 were fixed before running the computations, in two documents: `preregistrazione_cap5_stato_prestimolo.md` (27 October 2026) and `preregistrazione_cap5_pendenza.md` (29 October 2026). The first two commits of this repository reproduce them with their original dates. The public history was rebuilt from a local working repository, which remains available on request. The English translations and the English comments in the scripts were added later, in a separate commit; they change no code.
 
-## Figure
+## Figures
 
-Ogni figura della tesi esce da uno script in `figure_tesi/scripts/`, numerato nell'ordine di comparsa, con lo stile comune di `stile_tesi.py` (IIT in blu, GNWT in rosso, grigi per il resto, virgola decimale).
+Each figure of the thesis is produced by a script in `figure_tesi/scripts/`, numbered in order of appearance, with the common style of `stile_tesi.py` (IIT in blue, GNWT in red, greys for everything else, decimal comma).
 
-| Script | Figura |
+| Script | Figure |
 |---|---|
-| `01_mappa_teorie.py` | mappa delle teorie della coscienza (cap. 1) |
-| `02_schema_lakatos.py` | schema del modello di Lakatos (cap. 2) |
-| `03_schema_paradigma.py` | paradigma sperimentale di COGITATE (cap. 3) |
-| `04_schema_predizioni.py` | andamento atteso per la predizione 2 (cap. 3) |
-| `05_percorso_analisi.py` | percorso della parte empirica (cap. 4) |
-| `06_mappa_3d_elettrodi.py` | mappa 3D degli elettrodi (cap. 4) |
-| `07_figura_sincronia_sintesi.py` | sintesi della connettività (cap. 4) |
-| `08_figura_profili_spettrali.py` | profili spettrali (cap. 4) |
-| `09_figure_stato_prestimolo.py` | stato pre-stimolo e connettività (cap. 5) |
-| `10_schema_lakatos_cogitate.py` | Lakatos applicato alle due teorie (cap. 6) |
-| `11_schema_stati_alterati.py` | schema degli stati alterati (cap. 7) |
-| `12_figure_pendenza.py`, `13_figura_confronto_alto_basso_pendenza.py` | versione di controllo con la LZC continua (cap. 5) |
+| `01_mappa_teorie.py` | map of the theories of consciousness (ch. 1) |
+| `02_schema_lakatos.py` | diagram of Lakatos's model (ch. 2) |
+| `03_schema_paradigma.py` | COGITATE experimental paradigm (ch. 3) |
+| `04_schema_predizioni.py` | expected time course for prediction 2 (ch. 3) |
+| `05_percorso_analisi.py` | path of the empirical part (ch. 4) |
+| `06_mappa_3d_elettrodi.py` | 3D map of the electrodes (ch. 4) |
+| `07_figura_sincronia_sintesi.py` | summary of connectivity (ch. 4) |
+| `08_figura_profili_spettrali.py` | spectral profiles (ch. 4) |
+| `09_figure_stato_prestimolo.py` | pre-stimulus state and connectivity (ch. 5) |
+| `10_schema_lakatos_cogitate.py` | Lakatos applied to the two theories (ch. 6) |
+| `11_schema_stati_alterati.py` | diagram of altered states (ch. 7) |
+| `12_figure_pendenza.py`, `13_figura_confronto_alto_basso_pendenza.py` | control version with continuous LZC (ch. 5) |
 
-Le figure 06, 07 e 08 richiedono i risultati di sincronia sul disco dei dati; le figure del capitolo 5 leggono i file in `extension/results/`.
+Figures 06, 07 and 08 need the synchrony results on the data drive; the chapter 5 figures read the files in `extension/results/`.
 
-## Licenza
+## Licence
 
-Il codice di questo repository è distribuito con licenza MIT (file `LICENSE`). I dati e il codice originale del consorzio restano soggetti alle rispettive licenze (CC BY 4.0 per i dati, MIT per il codice).
+The code in this repository is released under the MIT licence (file `LICENSE`). The data and the original code of the consortium remain subject to their own licences (CC BY 4.0 for the data, MIT for the code).
 
-## Crediti
+## Credits
 
-Dati e codice originali: Cogitate Consortium. Gli stimoli in `figure_tesi/stimoli_cogitate/` vengono dal repository `cogitate-experiment-code` del consorzio (licenza MIT): immagini degli oggetti per cortesia di Michael J. Tarr, Carnegie Mellon University, http://www.tarrlab.org/; volti creati con FaceGen Modeler 3.1.
+Original data and code: Cogitate Consortium. The stimuli in `figure_tesi/stimoli_cogitate/` come from the consortium repository `cogitate-experiment-code` (MIT licence): object images courtesy of Michael J. Tarr, Carnegie Mellon University, http://www.tarrlab.org/; faces created with FaceGen Modeler 3.1.

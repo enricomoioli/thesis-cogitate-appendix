@@ -1,29 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Mappa tempo-frequenza dei contrasti di connettivita' (dfc_tfr).
+Time-frequency map of the connectivity contrasts (dfc_tfr).
 
-Mediare sulle frequenze per disegnare una curva va bene per dfc a banda
-singola, ma con dfc_tfr
-(104 frequenze da 2 a 180 Hz) diluisce qualunque effetto confinato a una banda
-stretta. Il paper riporta l'effetto nella gamma: mediando su tutto lo spettro lo si
-annacqua fino a renderlo invisibile.
+Averaging over frequencies to draw a curve is fine for single-band dfc,
+but with dfc_tfr
+(104 frequencies from 2 to 180 Hz) it dilutes any effect confined to a narrow
+band. The paper reports the effect in the gamma band: averaging over the whole
+spectrum waters it down until it becomes invisible.
 
-Questo script mostra invece il piano tempo-frequenza completo, senza mediare:
-  - riga 1: connettivita' media per le prove della categoria preferita
-  - riga 2: connettivita' media per le prove dell'altra categoria
-  - riga 3: la differenza fra le due, con il contorno delle finestre significative
-Piu' un profilo spettrale che indica in quale banda (se in una) la differenza si
-concentra, mediata sulla sola finestra post-stimolo.
+This script instead shows the full time-frequency plane, without averaging:
+  - row 1: mean connectivity for the trials of the preferred category
+  - row 2: mean connectivity for the trials of the other category
+  - row 3: the difference between the two, with the outline of the significant windows
+Plus a spectral profile showing in which band (if any) the difference is
+concentrated, averaged over the post-stimulus window only.
 
-Uso, dalla cartella coglib\\ieeg con l'ambiente cogitate_ecog attivo:
+Usage, from the folder coglib\\ieeg with the cogitate_ecog environment active:
 
-    python D:\\TESI\\manoscritto\\cap4\\scripts\\04_mappa_tf_sincronia.py NOME_ANALISI [roi]
+    python D:\\TESI\\manoscritto\\cap4\\scripts\\04_mappa_tf_sincronia.py ANALYSIS_NAME [roi]
 
-Esempio:
+Example:
     python D:\\TESI\\manoscritto\\cap4\\scripts\\04_mappa_tf_sincronia.py category_faces_objects_synchrony_dfc_tfr_irrelevant_no_act gnw
 
-Se la roi non e' indicata, le elabora entrambe.
+If the roi is not given, both are processed.
 """
 
 import sys
@@ -39,15 +39,15 @@ PREPROC = "desbadcharej_notfil_lapref"
 PREFIX = "sub-super_ses-1_task-Dur_ana-synchrony_analysis_"
 OUT_DIR = Path(r"D:\TESI\manoscritto\cap4\figure_lavoro")
 
-# Finestra su cui calcolare il profilo spettrale (post-stimolo, escludendo i bordi
-# dove la finestra scorrevole sporge oltre i dati e produce artefatti).
+# Window for the spectral profile (post-stimulus, excluding the edges
+# where the sliding window extends beyond the data and produces artefacts).
 FINESTRA_PROFILO = (0.0, 1.5)
-# Margine da escludere a ciascun estremo per gli artefatti di bordo.
+# Margin to exclude at each end because of edge artefacts.
 MARGINE_BORDI = 0.15
-# Basale per le due mappe in alto: ogni frequenza e' espressa come variazione
-# percentuale rispetto alla propria media in questa finestra pre-stimolo. Senza
-# normalizzazione la scala e' dominata dalle basse frequenze (connettivita' ~10 volte
-# piu' alta sotto i 10 Hz) e il resto del piano risulta piatto.
+# Baseline for the two top maps: each frequency is expressed as percentage
+# change from its own mean in this pre-stimulus window. Without
+# normalization the scale is dominated by low frequencies (connectivity ~10 times
+# higher below 10 Hz) and the rest of the plane looks flat.
 FINESTRA_BASALE = (-0.5, -0.1)
 
 
@@ -61,7 +61,7 @@ def carica(nome_analisi, roi):
 
 
 def maschera_senza_bordi(tempi):
-    """Esclude i primi e ultimi MARGINE_BORDI secondi (artefatti della finestra scorrevole)."""
+    """Exclude the first and last MARGINE_BORDI seconds (sliding-window artefacts)."""
     return (tempi > tempi.min() + MARGINE_BORDI) & (tempi < tempi.max() - MARGINE_BORDI)
 
 
@@ -75,8 +75,8 @@ def disegna(nome_analisi, roi, dati):
 
     pannelli = [
         ("volti", dati["cat1_to_cat1"], dati["cat1_to_cat2"], dati["p_values_fac_selective"]),
-        # secondo indice = categoria letterale del trial (1=volti, 2=oggetti):
-        # per gli elettrodi-oggetti i trial preferiti sono cat2_to_cat2.
+        # second index = literal category of the trial (1=faces, 2=objects):
+        # for object electrodes the preferred trials are cat2_to_cat2.
         ("oggetti", dati["cat2_to_cat2"], dati["cat2_to_cat1"], dati["p_values_obj_selective"]),
     ]
 
@@ -90,7 +90,7 @@ def disegna(nome_analisi, roi, dati):
             continue
 
         n = a.shape[0]
-        media_a = a.mean(0)          # (n_freqs, n_tempi)
+        media_a = a.mean(0)          # (n_freqs, n_times)
         media_b = b.mean(0)
         differenza = media_a - media_b
 
@@ -101,8 +101,8 @@ def disegna(nome_analisi, roi, dati):
 
         fig = plt.figure(figsize=(13, 9))
 
-        # --- tre mappe tempo-frequenza ---
-        # in alto: variazione percentuale rispetto al basale pre-stimolo, per frequenza
+        # --- three time-frequency maps ---
+        # top: percentage change from the pre-stimulus baseline, per frequency
         basale = (tempi >= FINESTRA_BASALE[0]) & (tempi <= FINESTRA_BASALE[1])
         rel_a = 100 * (media_a / media_a[:, basale].mean(1, keepdims=True) - 1)
         rel_b = 100 * (media_b / media_b[:, basale].mean(1, keepdims=True) - 1)
@@ -135,11 +135,11 @@ def disegna(nome_analisi, roi, dati):
         if sig is not None and sig.any():
             ax3.contour(tempi[validi], freqs, sig[:, validi], levels=[0.5], colors="k", linewidths=1.5)
 
-        # --- profilo spettrale della differenza, finestra post-stimolo ---
+        # --- spectral profile of the difference, post-stimulus window ---
         ax4 = plt.subplot(2, 2, 4)
         finestra = (tempi >= FINESTRA_PROFILO[0]) & (tempi <= FINESTRA_PROFILO[1])
-        # errore standard fra elettrodi, per banda, mediato sulla finestra post-stimolo
-        per_elettrodo = (a - b)[:, :, finestra].mean(2)   # (n_elettrodi, n_freqs)
+        # standard error across electrodes, per band, averaged over the post-stimulus window
+        per_elettrodo = (a - b)[:, :, finestra].mean(2)   # (n_electrodes, n_freqs)
         profilo = per_elettrodo.mean(0)
         sem = per_elettrodo.std(0) / np.sqrt(max(n - 1, 1))
 
@@ -149,7 +149,7 @@ def disegna(nome_analisi, roi, dati):
         ax4.set_xlabel("frequenza (Hz)")
         ax4.set_ylabel("differenza media")
         ax4.set_title("profilo spettrale, {0}-{1} s".format(*FINESTRA_PROFILO))
-        # bande di riferimento
+        # reference bands
         for f0, f1, nome in [(8, 13, "alfa"), (13, 30, "beta"), (30, 70, "gamma"), (70, 150, "alta gamma")]:
             if freqs.max() >= f0:
                 ax4.axvspan(f0, min(f1, freqs.max()), alpha=0.08, color="C0")
@@ -165,7 +165,7 @@ def disegna(nome_analisi, roi, dati):
         plt.close(fig)
         print("Salvato: {0}".format(percorso))
 
-        # --- riepilogo numerico, per non doverlo dedurre a occhio dalla figura ---
+        # --- numerical summary, so that it need not be read off the figure ---
         banda_max = freqs[np.argmax(np.abs(profilo))]
         print("    picco della differenza a {0:.0f} Hz (valore {1:+.5f})".format(
             banda_max, profilo[np.argmax(np.abs(profilo))]))

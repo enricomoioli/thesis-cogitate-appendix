@@ -1,20 +1,20 @@
 """
-Scarica tutti i soggetti iEEG del consorzio Cogitate da XNAT.
+Download all iEEG subjects of the Cogitate consortium from XNAT.
 
-AMBIENTE: ieeg_release  (NON cogitate_ecog: xnat_download vive in cog_ieeg,
-                         installato solo in ieeg_release)
+ENVIRONMENT: ieeg_release  (NOT cogitate_ecog: xnat_download lives in cog_ieeg,
+                            installed only in ieeg_release)
 
-USO:
+USAGE:
     conda activate ieeg_release
     python D:\\TESI\\manoscritto\\cap4\\scripts\\01_scarica_soggetti.py
 
-Chiede username e password XNAT UNA VOLTA all'inizio, poi procede da solo.
-E' ripartibile: i soggetti gia' presenti vengono saltati.
+Asks for the XNAT username and password ONCE at the start, then runs on its own.
+It can be restarted: subjects already present are skipped.
 
-ATTENZIONE: se l'esecuzione si interrompe a meta' di un soggetto, resta una
-cartella parziale che al riavvio verra' saltata come se fosse completa.
-In quel caso cancellare a mano la cartella del soggetto interrotto prima
-di rilanciare (l'ultimo soggetto nominato a schermo prima dell'interruzione).
+WARNING: if the run is interrupted halfway through a subject, a partial folder
+is left behind and will be skipped on restart as if it were complete.
+In that case delete the folder of the interrupted subject by hand before
+restarting (the last subject named on screen before the interruption).
 """
 
 from cog_ieeg.utils import set_bids_root, get_bids_root
@@ -30,8 +30,8 @@ print("Il bundle completo e' circa 98 GB: verifica lo spazio libero su E: prima 
 print("I soggetti gia' scaricati verranno saltati automaticamente.")
 print()
 
-# subjects_to_download=None  ->  scarica tutti i soggetti presenti nel progetto
-# overwrite=False            ->  salta quelli gia' presenti in locale
+# subjects_to_download=None  ->  download all subjects in the project
+# overwrite=False            ->  skip those already present locally
 xnat_download(None, overwrite=False)
 
 print()

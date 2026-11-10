@@ -2,10 +2,10 @@
 """
 23_controllo_dfc_tutte_le_prove.py
 
-Controllo di correttezza (non un'analisi): la DFC media su tutte le prove calcolata
-da synchrony_master_pendenza.py deve coincidere con quella del capitolo 4.
-Confronta, per le due regioni, le quattro matrici cat1_to_cat1 ... cat2_to_cat2
-e gli elenchi dei pazienti.
+Correctness check (not an analysis): the mean DFC over all trials computed by
+synchrony_master_pendenza.py must coincide with that of chapter 4.
+Compares, for the two regions, the four matrices cat1_to_cat1 ... cat2_to_cat2
+and the lists of patients.
 """
 
 from pathlib import Path

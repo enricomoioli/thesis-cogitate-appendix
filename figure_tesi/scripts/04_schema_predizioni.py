@@ -2,31 +2,30 @@
 """
 04_schema_predizioni.py
 
-Schema stilizzato della predizione 2 del Cogitate (mantenimento del
-contenuto cosciente nel tempo), ridisegnato dalla Fig. 1a (pannello centrale)
-di Cogitate Consortium (2025):
+Stylized diagram of COGITATE prediction 2 (maintenance of conscious content
+over time), redrawn from Fig. 1a (central panel) of Cogitate Consortium (2025):
 
-- IIT, corteccia posteriore: attivazione sostenuta per tutta la durata dello
-  stimolo, ritorno al basale dopo lo spegnimento;
-- GNWT, corteccia prefrontale: ignition breve 0,3-0,5 s dopo l'accensione e
-  0,3-0,5 s dopo lo spegnimento, indipendente dalla durata, attivita'
-  praticamente assente nel mezzo (Methods, "Duration analysis").
+- IIT, posterior cortex: sustained activation for the whole duration of the
+  stimulus, return to baseline after offset;
+- GNWT, prefrontal cortex: brief ignition 0.3-0.5 s after onset and
+  0.3-0.5 s after offset, independent of duration, activity practically
+  absent in between (Methods, "Duration analysis").
 
-Le curve sono predizioni stilizzate, non dati: l'asse verticale non ha unita'.
-Tre durate dello stimolo (0,5 / 1,0 / 1,5 s), come nel paradigma: una riga
-per durata, come nella figura originale, cosi' che ogni ignition allo
-spegnimento sia attribuibile senza ambiguita' al proprio stimolo.
+The curves are stylized predictions, not data: the vertical axis has no unit.
+Three stimulus durations (0.5 / 1.0 / 1.5 s), as in the paradigm: one row
+per duration, as in the original figure, so that each offset ignition can be
+attributed unambiguously to its own stimulus.
 
-Legenda in basso: fascia grigia = stimolo acceso; fascia rosa = finestre di
-ignition preregistrate. Che l'asse verticale non abbia unita' e' detto in
-didascalia.
+Legend at the bottom: grey band = stimulus on; pink band = preregistered
+ignition windows. That the vertical axis has no unit is stated in the
+caption.
 
-Solo matplotlib/numpy: gira in qualunque ambiente (es. quello MNE).
+Only matplotlib/numpy: runs in any environment (e.g. the MNE one).
 
 Output (in figure_tesi\\output\\schemi\\):
-    schema_predizione2.png (300 dpi) e schema_predizione2.pdf (vettoriale)
+    schema_predizione2.png (300 dpi) and schema_predizione2.pdf (vector)
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\04_schema_predizioni.py
 """
 
@@ -38,8 +37,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
-# fattore di ingrandimento del testo: nel PDF la figura viene ridotta alla
-# larghezza della pagina, quindi il testo va ingrandito di conseguenza
+# text magnification factor: in the PDF the figure is shrunk to the
+# page width, so the text must be enlarged accordingly
 SCALA = 1.3
 
 from stile_tesi import COLORI, GRIGIO_SCURO, applica_stile, lettera, salva
@@ -47,7 +46,7 @@ from stile_tesi import COLORI, GRIGIO_SCURO, applica_stile, lettera, salva
 OUTPUT_DIR = Path(r"D:\TESI\manoscritto\figure_tesi\output\schemi")
 
 DURATE = (0.5, 1.0, 1.5)
-FINESTRA_IGNIZIONE = (0.3, 0.5)  # s dopo accensione e dopo spegnimento (preregistrata)
+FINESTRA_IGNIZIONE = (0.3, 0.5)  # s after onset and after offset (preregistered)
 
 t = np.linspace(-0.4, 2.5, 3000)
 
@@ -57,12 +56,12 @@ def sigmoide(x, tau=0.03):
 
 
 def curva_iit(durata):
-    """Plateau: sale all'accensione, resta alto per la durata, torna al basale."""
+    """Plateau: rises at onset, stays high for the duration, returns to baseline."""
     return sigmoide(t - 0.1) * (1.0 - sigmoide(t - durata - 0.1))
 
 
 def curva_gnw(durata):
-    """Due ignition brevi, centrate nella finestra 0,3-0,5 s dopo accensione e spegnimento."""
+    """Two brief ignitions, centred in the 0.3-0.5 s window after onset and offset."""
     centro = np.mean(FINESTRA_IGNIZIONE)
     ampiezza = 0.045
     return (np.exp(-0.5 * ((t - centro) / ampiezza) ** 2)
@@ -72,11 +71,11 @@ def curva_gnw(durata):
 def disegna_riga(asse, teoria, durata, prima_riga, ultima_riga):
     colore = COLORI[teoria]
 
-    # stimolo acceso: fascia grigia chiara per tutta la sua durata
+    # stimulus on: light grey band for its whole duration
     asse.axvspan(0, durata, color="0.93", zorder=0, linewidth=0)
 
     if teoria == "gnw":
-        # finestre di ignition preregistrate: 0,3-0,5 s dopo accensione e dopo spegnimento
+        # preregistered ignition windows: 0.3-0.5 s after onset and after offset
         for inizio in (0.0, durata):
             asse.axvspan(inizio + FINESTRA_IGNIZIONE[0], inizio + FINESTRA_IGNIZIONE[1],
                          color=colore, alpha=0.15, zorder=1, linewidth=0)

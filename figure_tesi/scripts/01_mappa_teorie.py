@@ -2,21 +2,21 @@
 """
 01_mappa_teorie.py
 
-Mappa delle teorie della coscienza per il cap. 1 ("Troppe teorie, poco
-confronto" e "Il resto del panorama in breve"), con lo stile comune
+Map of the theories of consciousness for chapter 1 ("Troppe teorie, poco
+confronto" and "Il resto del panorama in breve"), with the common style
 (stile_tesi.py).
 
-- Le quattro famiglie sono quelle di Seth e Bayne (2022), come riportate nel
-  testo del cap. 1. Gli esempi dentro ciascuna famiglia NON sono la
-  classificazione di Seth e Bayne: sono le teorie che questa tesi discute,
-  collocate dove il testo le colloca (cap. 2 e cap. 6).
-- Sotto, in grigio tratteggiato, le proposte piu' speculative che il cap. 1
-  nomina e dichiara di non trattare.
-- IIT e GNWT nei colori delle teorie; tutto il resto in grigio.
+- The four families are those of Seth and Bayne (2022), as reported in the
+  text of chapter 1. The examples within each family are NOT Seth and Bayne's
+  classification: they are the theories discussed in this thesis, placed
+  where the text places them (chapters 2 and 6).
+- Below, in dashed grey, the more speculative proposals that chapter 1
+  mentions and declares it will not cover.
+- IIT and GNWT in the theory colours; everything else in grey.
 
 Output: figure_tesi\\output\\schemi\\mappa_teorie.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\01_mappa_teorie.py
 """
 
@@ -32,7 +32,7 @@ from stile_tesi import COLORI, GRIGIO_SCURO, GRIGIO_MEDIO, applica_stile, salva
 
 USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\schemi\mappa_teorie")
 
-# (nome della famiglia, [(teoria, chiave colore o None)])
+# (family name, [(theory, colour key or None)])
 FAMIGLIE = [
     ("Teorie di\nordine superiore", [("HOROR", None), ("perceptual reality\nmonitoring", None)]),
     ("Teorie del\nglobal workspace", [("GNWT", "gnw")]),
@@ -43,7 +43,7 @@ FAMIGLIE = [
 ]
 SPECULATIVE = ["panpsichismo", "Orch OR\n(microtubuli)", "campo elettro-\nmagnetico (cemi)"]
 
-# grigio delle proposte speculative: piu' scuro di GRIGIO_MEDIO (0.55) per leggibilita'
+# grey of the speculative proposals: darker than GRIGIO_MEDIO (0.55) for readability
 GRIGIO_SPECULATIVE = "0.40"
 
 L, H = 3.6, 3.9
@@ -85,7 +85,7 @@ def main():
     asse.text(0, H + 0.35, "Le quattro famiglie di Seth e Bayne, con le teorie discusse in questa tesi",
               ha="left", va="bottom", fontsize=13, color=GRIGIO_SCURO)
 
-    # proposte speculative
+    # speculative proposals
     larghezza = 3 * PASSO + L
     y0 = -2.0
     asse.text(0, y0 + 1.05, "Proposte pi\u00f9 speculative, nominate ma non trattate", ha="left", va="bottom",

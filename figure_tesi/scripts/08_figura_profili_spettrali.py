@@ -2,27 +2,27 @@
 """
 08_figura_profili_spettrali.py
 
-Figura 4.4 della tesi: profili spettrali della differenza di connettivita'
-(DFC) fra prove con volti e prove con oggetti, per i quattro insiemi della
-figura 4.3 (07_figura_sincronia_sintesi.py). Non ha un equivalente nel paper:
-serve a mostrare in quale banda di frequenza si concentra ciascun effetto.
+Figure 4.4 of the thesis: spectral profiles of the connectivity difference
+(DFC) between face trials and object trials, for the four sets of figure 4.3
+(07_figura_sincronia_sintesi.py). It has no equivalent in the paper: it shows
+in which frequency band each effect is concentrated.
 
-Stesse convenzioni della figura 4.3:
-- disposizione 2 x 2: in alto V1/V2 (iit), in basso prefrontale (gnw);
-  a sinistra elettrodi selettivi per i volti, a destra per gli oggetti;
-- segno volti MENO oggetti per entrambe le colonne (come nel paper): per
-  gli elettrodi selettivi per gli oggetti un effetto a favore della
-  categoria preferita e' negativo.
-Per ogni frequenza: media della differenza fra 0 e 1,5 s per elettrodo,
-poi media ed errore standard fra elettrodi. Colori delle teorie dallo
-stile comune (IIT blu, GNW rosso); linee grigie ai confini delle bande
-(8, 13, 30, 70, 150 Hz). Stessa scala verticale nei quattro pannelli.
+Same conventions as figure 4.3:
+- 2 x 2 layout: top V1/V2 (iit), bottom prefrontal (gnw);
+  left face-selective electrodes, right object-selective;
+- sign faces MINUS objects for both columns (as in the paper): for
+  object-selective electrodes an effect in favour of the preferred
+  category is negative.
+For each frequency: mean of the difference between 0 and 1.5 s per electrode,
+then mean and standard error across electrodes. Theory colours from the common
+style (IIT blue, GNW red); grey lines at the band boundaries
+(8, 13, 30, 70, 150 Hz). Same vertical scale in the four panels.
 
-Sola lettura dei .npz prodotti da synchrony_master.py. Richiede il disco E:.
+Reads only the .npz files produced by synchrony_master.py. Requires drive E:.
 
 Output: figure_tesi\\output\\cap4\\sincronia_profili.png / .pdf
 
-Uso:
+Usage:
     python D:\\TESI\\manoscritto\\figure_tesi\\scripts\\08_figura_profili_spettrali.py
 """
 
@@ -44,13 +44,13 @@ USCITA = Path(r"D:\TESI\manoscritto\figure_tesi\output\cap4\sincronia_profili")
 
 FINESTRA_PROFILO = (0.0, 1.5)
 CONFINI_BANDE = (8, 13, 30, 70, 150)
-# fattore di ingrandimento del testo: nel PDF la figura viene ridotta alla
-# larghezza della pagina, quindi il testo va ingrandito di conseguenza
+# text magnification factor: in the PDF the figure is shrunk to the
+# page width, so the text must be enlarged accordingly
 SCALA = 1.25
 DIMENSIONE_TITOLI = 10 * SCALA
-# Scala verticale calcolata sulle sole frequenze >= 8 Hz: sotto, le stime sono
-# instabili (errore standard ampio) e schiaccerebbero il resto. Il tratto basso
-# che esce dalla scala viene tagliato e dichiarato in didascalia.
+# Vertical scale computed on frequencies >= 8 Hz only: below that, estimates are
+# unstable (large standard error) and would squash the rest. The low stretch
+# that goes off scale is cut and declared in the caption.
 FREQ_MIN_SCALA = 8
 
 PANNELLI = [(0, 0, "iit", "volti", "V1/V2, selettivi per i volti"),
@@ -67,7 +67,7 @@ def carica(roi):
 
 
 def volti_meno_oggetti(dati, categoria):
-    """Indici del consorzio: secondo indice = categoria del trial (1 = volti, 2 = oggetti)."""
+    """Consortium indices: second index = trial category (1 = faces, 2 = objects)."""
     if categoria == "volti":
         return np.asarray(dati["cat1_to_cat1"]) - np.asarray(dati["cat1_to_cat2"])
     return np.asarray(dati["cat2_to_cat1"]) - np.asarray(dati["cat2_to_cat2"])
@@ -89,7 +89,7 @@ def main():
         diff = volti_meno_oggetti(d, categoria)
         n = diff.shape[0]
         finestra = (tempi >= FINESTRA_PROFILO[0]) & (tempi <= FINESTRA_PROFILO[1])
-        per_elettrodo = diff[:, :, finestra].mean(2)          # elettrodi x frequenze
+        per_elettrodo = diff[:, :, finestra].mean(2)          # electrodes x frequencies
         profilo = per_elettrodo.mean(0)
         sem = per_elettrodo.std(0, ddof=1) / np.sqrt(n)
 
@@ -110,7 +110,7 @@ def main():
         virgola_decimale(asse)
 
     limite = np.ceil(massimo * 1.1 * 1000) / 1000
-    assi[0, 0].set_ylim(-limite, limite)  # assi condivisi: vale per tutti i pannelli
+    assi[0, 0].set_ylim(-limite, limite)  # shared axes: applies to all panels
     fig.tight_layout(h_pad=2.0, w_pad=1.5)
     salva(fig, USCITA)
 

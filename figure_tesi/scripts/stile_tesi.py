@@ -2,20 +2,20 @@
 """
 stile_tesi.py
 
-Stile comune per tutte le figure della tesi. Si importa dagli script in
-figure_tesi\\scripts\\ (stessa cartella):
+Common style for all the figures of the thesis. Imported by the scripts in
+figure_tesi\\scripts\\ (same folder):
 
     from stile_tesi import COLORI, applica_stile, virgola_decimale, lettera, salva
 
-Regole:
-- colori delle teorie fissi in tutta la tesi: IIT blu, GNW rosso
-  (gli stessi della mappa degli elettrodi e dello schema delle predizioni);
-  per tutto cio' che non e' una teoria si usano grigi, mai rosso o blu;
-- decimali con la virgola;
-- lettere di pannello (A, B, C...) in grassetto in alto a sinistra, niente
-  titolo generale con identificativi interni: il contesto sta in didascalia;
-- niente bordi superiore e destro;
-- salvataggio in PNG a 300 dpi e in PDF vettoriale.
+Rules:
+- theory colours fixed throughout the thesis: IIT blue, GNW red
+  (the same as in the electrode map and in the predictions diagram);
+  anything that is not a theory uses greys, never red or blue;
+- comma as decimal separator (Italian convention of the thesis);
+- panel letters (A, B, C...) in bold at the top left, no general title with
+  internal identifiers: the context goes in the caption;
+- no top and right spines;
+- saved as PNG at 300 dpi and as vector PDF.
 """
 
 from pathlib import Path
@@ -29,7 +29,7 @@ GRIGIO_SCURO = "0.25"
 GRIGIO_MEDIO = "0.55"
 GRIGIO_CHIARO = "0.88"
 
-# mappe di colore: sequenziale per valori assoluti, divergente per differenze
+# colour maps: sequential for absolute values, diverging for differences
 MAPPA_SEQUENZIALE = "viridis"
 MAPPA_DIVERGENTE = "RdBu_r"
 
@@ -53,13 +53,13 @@ def applica_stile():
 
 def _con_virgola(valore, _pos):
     testo = "{0:g}".format(valore)
-    if "e" in testo:  # notazione scientifica: la si lascia com'e', solo la virgola
+    if "e" in testo:  # scientific notation: left as it is, only the comma
         testo = "{0:.2g}".format(valore)
     return testo.replace("-", "\u2212").replace(".", ",")
 
 
 def virgola_decimale(asse, x=True, y=True):
-    """Etichette degli assi con la virgola decimale."""
+    """Axis labels with the decimal comma."""
     formattatore = FuncFormatter(_con_virgola)
     if x:
         asse.xaxis.set_major_formatter(formattatore)
@@ -72,7 +72,7 @@ def virgola_barra_colore(barra):
 
 
 def lettera(asse, testo, titolo=None):
-    """Titolo di pannello: lettera in grassetto, eventuale descrizione breve."""
+    """Panel title: letter in bold, optional short description."""
     if titolo:
         asse.set_title(r"$\bf{" + testo + r"}$   " + titolo)
     else:
