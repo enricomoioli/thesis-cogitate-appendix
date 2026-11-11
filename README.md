@@ -47,7 +47,7 @@ ambienti/             conda recipes of the environments used
 
 ## The consortium code
 
-The connectivity analyses run with the consortium code (`cogitate-msp1`, MIT licence), corrected as described in chapter 4. The modified version is in a separate repository, a fork of the original: [link to be added]. It also contains the two scripts derived for chapter 5, `coglib/ieeg/synchrony/synchrony_master_stato.py` and `synchrony_master_pendenza.py`.
+The connectivity analyses run with the consortium code (`cogitate-msp1`, MIT licence), corrected as described in chapter 4. The modified version is in a separate repository, a fork of the original, branch `thesis`: <https://github.com/enricomoioli/cogitate-msp1/tree/thesis>. It also contains the two scripts derived for chapter 5, `coglib/ieeg/synchrony/synchrony_master_stato.py` and `synchrony_master_pendenza.py`.
 
 ## Data
 
