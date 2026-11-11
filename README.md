@@ -49,6 +49,20 @@ ambienti/             conda recipes of the environments used
 
 The connectivity analyses run with the consortium code (`cogitate-msp1`, MIT licence), corrected as described in chapter 4. The modified version is in a separate repository, a fork of the original, branch `thesis`: <https://github.com/enricomoioli/cogitate-msp1/tree/thesis>. It also contains the two scripts derived for chapter 5, `coglib/ieeg/synchrony/synchrony_master_stato.py` and `synchrony_master_pendenza.py`.
 
+### Issues reported to the consortium
+
+The defects in the consortium code described in chapter 4 were reported on the original repository on 11 November 2026:
+
+| Issue | Defect (chapter 4) |
+|---|---|
+| [#53](https://github.com/Cogitate-consortium/cogitate-msp1/issues/53) | amplitude normalization always takes the interruption branch (`is None` check on `False`) |
+| [#54](https://github.com/Cogitate-consortium/cogitate-msp1/issues/54) | bad-channel attributes not initialized for a subject processed for the first time |
+| [#55](https://github.com/Cogitate-consortium/cogitate-msp1/issues/55) | demographic fields `n/a` in the BIDS data stop the preprocessing |
+| [#56](https://github.com/Cogitate-consortium/cogitate-msp1/issues/56) | no fixed seed in the category selectivity permutation test |
+| [#57](https://github.com/Cogitate-consortium/cogitate-msp1/issues/57) | synchrony configs point to `_400ms` selectivity folders that are never created |
+
+The remaining defect, the missing individual FreeSurfer reconstructions, is a declared feature of the data release and was not reported.
+
 ## Data
 
 Not included. They are the public iEEG data of the COGITATE consortium: 38 patients, BIDS format, CC BY 4.0 licence, described in Seedat et al., *Scientific Data*, 2025, doi:10.1038/s41597-025-04833-z. The script `cap4/scripts/01_scarica_soggetti.py` downloads them, with the credentials of one's own account.
